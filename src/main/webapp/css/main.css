@@ -1,0 +1,28 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+:root {
+    --bg-main: #FFFFFF;
+    --bg-secondary: #F7F7F5; /* Notion Sidebar/Table Gray */
+    --text-main: #37352F;
+    --border-light: #EDECE9;
+    --pill-interview: #FDECC8; /* Soft Yellow */
+    --pill-offer: #DBEDDB;     /* Soft Green */
+    --pill-applied: #E1F0EF;   /* Soft Blue */
+}
+a {
+    text-decoration: none;
+}
+/* Base Card Style from Figma */
+.job-card {
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 16px;
+    transition: background 0.2s ease;
+    cursor: pointer;
+}
+
+.job-card:hover {
+    background-color: var(--bg-secondary);
+}

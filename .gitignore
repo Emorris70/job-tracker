@@ -36,7 +36,7 @@ build/
 *.log
 logs/
 
-# Sensitive Data - PROTECT YOUR AWS/DATABASE KEYS
+# Sensitive Data
 .env
 *.properties
 !src/main/resources/log4j2.properties
