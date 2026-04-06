@@ -12,7 +12,7 @@ import java.util.Properties;
  *
  * @author EmileM
  */
-public class CognitoClientUtil implements PropertiesLoader {
+public class CognitoClientUtil {
     private Properties properties;
 
     private static CognitoIdentityProviderClient cognitoClient;
@@ -26,7 +26,7 @@ public class CognitoClientUtil implements PropertiesLoader {
      * Instantiates a new CognitoClientUtil. And initializes
      * the properties variable.
      *
-     * @param properties
+     * @param properties the read properties file context.
      */
     public CognitoClientUtil(Properties properties) {
         this();

@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9573e47b-8e41-4860-b0ac-c41935902eaa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/persistence/CognitoClientUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/persistence/CognitoClientUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/persistence/GenericDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/persistence/GenericDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +112,7 @@
       <workItem from="1775442585829" duration="2237000" />
       <workItem from="1775445437861" duration="265000" />
       <workItem from="1775446090381" duration="16000" />
-      <workItem from="1775446147929" duration="3331000" />
+      <workItem from="1775446147929" duration="4615000" />
     </task>
     <servers />
   </component>

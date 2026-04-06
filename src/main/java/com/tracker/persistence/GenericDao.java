@@ -104,8 +104,6 @@ public class GenericDao<T> {
         });
     }
 
-    // TODO add method to perform a JOIN
-
     /**
      * Wraps a database operation within a Hibernate session and transaction.
      * This method ensures that the transaction is committed on success,
