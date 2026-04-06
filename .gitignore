@@ -40,3 +40,6 @@ logs/
 .env
 *.properties
 !src/main/resources/log4j2.properties
+
+# hibernate
+/src/main/resources/hibernate.cfg.xml
