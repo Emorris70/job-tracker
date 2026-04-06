@@ -1,56 +1,38 @@
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+# OS Junk
+.DS_Store
 .DS_Store*
-# User-specific stuff:
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/dictionaries
-.idea/vcs.xml
-.idea/jsLibraryMappings.xml
+Thumbs.db
 
-# Sensitive or high-churn files:
-.idea/dataSources.ids
-.idea/dataSources.xml
-.idea/dataSources.local.xml
-.idea/sqlDataSources.xml
-.idea/dynamic.xml
-.idea/uiDesigner.xml
-
-# Gradle:
-.idea/gradle.xml
-.idea/libraries
-
-# Mongo Explorer plugin:
-.idea/mongoSettings.xml
-
-## File-based project format:
-*.iws
-
-## Plugin-specific files:
-
-# IntelliJ
-/out/
-
-# Maven
+# Maven - Ignore the build folder!
+target/
 /target/
-/log/
-/lib/
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
 
-# mpeltonen/sbt-idea plugin
-.idea_modules/
+# IntelliJ IDEA - Keep your workspace private
+.idea/
+*.iws
+*.iml
+*.ipr
+/out/
+.kotlin/
 
-# JIRA plugin
-atlassian-ide-plugin.xml
+# VS Code
+.vscode/
 
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-fabric.properties
-# Resources
+# Eclipse & NetBeans
+.project
+.classpath
+.settings/
+.apt_generated
+.factorypath
+/nbproject/private/
+build/
 
-# Logs files
-logs
-#dump files
-dba
-# test resources dir
+# Sensitive Data - PROTECT YOUR COGNITO/DATABASE KEYS
+.env
+*.properties
+!src/main/resources/*.properties
