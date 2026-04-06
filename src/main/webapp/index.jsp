@@ -6,6 +6,14 @@
 <%--<jsp:include page="header.jsp"/>--%>
 <main class="container">
     <h1 class="m-h">Welcome Back!</h1>
+
+    <div class="errorMsg">
+        <c:if test="${not empty sessionScope.error}">
+            <p class="error-msg">${sessionScope.error}</p>
+            <c:remove var="error" scope="session"/>
+        </c:if>
+    </div>
+
     <form method="POST" action="auth" id="auth-exists">
         <div class="con-wrapper">
             <label for="email">email</label>

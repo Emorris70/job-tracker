@@ -5,6 +5,12 @@
 <body>
 <main class="container">
     <h1 class="m-h">Forgot Password?</h1>
+    <div class="errorMsg">
+        <c:if test="${not empty sessionScope.error}">
+            <p class="error-msg">${sessionScope.error}</p>
+            <c:remove var="error" scope="session"/>
+        </c:if>
+    </div>
     <p class="p-deco">Enter your email to receive a rest link</p>
     <form method="POST" action="auth" id="auth-form">
         <div class="con-wrapper">

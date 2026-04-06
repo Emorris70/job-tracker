@@ -60,7 +60,7 @@ public class Auth extends HttpServlet {
             req.setAttribute("page", "Login - Job Tracker");
 
         } else if ("reset-pass".equals(req.getParameter("action"))) {
-            url = "/passwordReset.jsp";
+            url = "/resetPassword.jsp";
             req.setAttribute("page", "Reset Password - Job Tracker");
 
         }

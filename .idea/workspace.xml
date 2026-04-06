@@ -11,13 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9573e47b-8e41-4860-b0ac-c41935902eaa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/auth_head.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/auth_head.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/confirm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/confirm.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/auth.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/auth.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Auth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Auth.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/signup.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resetPassword.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resetPassword.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +30,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
-        <option value="Jsp File" />
         <option value="HTML File" />
+        <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -245,7 +241,7 @@
       <workItem from="1775491497865" duration="3299000" />
       <workItem from="1775497590222" duration="344000" />
       <workItem from="1775498086315" duration="241000" />
-      <workItem from="1775498431317" duration="5843000" />
+      <workItem from="1775498431317" duration="8186000" />
     </task>
     <servers />
   </component>
