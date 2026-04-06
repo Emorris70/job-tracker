@@ -16,7 +16,7 @@
     <execution />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="13" />
+    <option name="cachedIndexableFilesCount" value="31" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -110,7 +110,7 @@
       <workItem from="1775442585829" duration="2237000" />
       <workItem from="1775445437861" duration="265000" />
       <workItem from="1775446090381" duration="16000" />
-      <workItem from="1775446147929" duration="2772000" />
+      <workItem from="1775446147929" duration="3331000" />
     </task>
     <servers />
   </component>
