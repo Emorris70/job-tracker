@@ -32,7 +32,11 @@ target/
 /nbproject/private/
 build/
 
-# Sensitive Data - PROTECT YOUR COGNITO/DATABASE KEYS
+# Logs
+*.log
+logs/
+
+# Sensitive Data - PROTECT YOUR AWS/DATABASE KEYS
 .env
 *.properties
 !src/main/resources/log4j2.properties
