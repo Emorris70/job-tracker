@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9573e47b-8e41-4860-b0ac-c41935902eaa" name="Changes" comment="" />
+    <list default="true" id="9573e47b-8e41-4860-b0ac-c41935902eaa" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +18,13 @@
   <component name="EmbeddingIndexingInfo">
     <option name="cachedIndexableFilesCount" value="13" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -78,6 +87,7 @@
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
+      "mysql",
       "mysql_aurora"
     ]
   }
@@ -100,7 +110,7 @@
       <workItem from="1775442585829" duration="2237000" />
       <workItem from="1775445437861" duration="265000" />
       <workItem from="1775446090381" duration="16000" />
-      <workItem from="1775446147929" duration="1492000" />
+      <workItem from="1775446147929" duration="2772000" />
     </task>
     <servers />
   </component>
