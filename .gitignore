@@ -3,7 +3,7 @@
 .DS_Store*
 Thumbs.db
 
-# Maven - Ignore the build folder!
+# Maven
 target/
 /target/
 *.war
@@ -12,7 +12,7 @@ target/
 *.tar.gz
 *.rar
 
-# IntelliJ IDEA - Keep your workspace private
+# IntelliJ IDEA
 .idea/
 *.iws
 *.iml
@@ -35,4 +35,4 @@ build/
 # Sensitive Data - PROTECT YOUR COGNITO/DATABASE KEYS
 .env
 *.properties
-!src/main/resources/*.properties
+!src/main/resources/log4j2.properties
