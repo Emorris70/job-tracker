@@ -10,6 +10,14 @@
     --pill-interview: #FDECC8; /* Soft Yellow */
     --pill-offer: #DBEDDB;     /* Soft Green */
     --pill-applied: #E1F0EF;   /* Soft Blue */
+    --xxxsmall-icon-size: 1rem; /* 16px */
+    --xxsmall-icon-size: 1.125rem; /* 18px */
+    --medium-icon-size: 1.5rem; /* 24px */
+    --large-icon-size: 2rem; /* 32px */
+    --mute-contrast: #585858;
+}
+body {
+    font-family: inter, sans-serif;
 }
 a {
     text-decoration: none;

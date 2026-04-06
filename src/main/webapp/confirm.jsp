@@ -1,16 +1,32 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: emorr
-  Date: 4/6/2026
-  Time: 11:44 AM
-  To change this template use File | Settings | File Templates.
---%>
+<jsp:include page="taglib.jsp"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
+<html lang="en">
+<jsp:include page="auth_head.jsp"/>
 <body>
-
+<main class="container override-animation">
+    <h1 class="m-h">Check your email</h1>
+    <p class="p-deco s-p">Enter the code that we sent to the email address. The code expires in 15 minutes.</p>
+    <div class="errorMsg">
+        <c:if test="${not empty sessionScope.error}">
+            <p class="error-msg">${sessionScope.error}</p>
+            <c:remove var="error" scope="session"/>
+        </c:if>
+    </div>
+    <form method="POST" action="auth" id="auth-exists">
+        <div class="con-wrapper">
+            <label for="v-code">Verification code</label>
+            <div class="input-wrapper">
+                <input type="text" name="v-code" id="v-code" placeholder="Enter code" />
+            </div>
+        </div>
+        <div class="btn-container sw-dir">
+            <button type="submit"
+                    name="action"
+                    value="confirm"
+                    class="btn-submit">Continue</button>
+            <a href="auth?action=sign-up" class="btn-submit back-btn">Back</a>
+        </div>
+    </form>
+</main>
 </body>
 </html>
