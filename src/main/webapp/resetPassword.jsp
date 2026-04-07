@@ -12,7 +12,7 @@
         </c:if>
     </div>
     <p class="p-deco">Enter your email to receive a rest link</p>
-    <form method="POST" action="auth" id="auth-form">
+    <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-form">
         <div class="con-wrapper">
             <label for="email">email</label>
             <div class="input-wrapper">

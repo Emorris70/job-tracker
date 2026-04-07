@@ -14,7 +14,11 @@
     --xxsmall-icon-size: 1.125rem; /* 18px */
     --medium-icon-size: 1.5rem; /* 24px */
     --large-icon-size: 2rem; /* 32px */
-    --mute-contrast: #585858;
+    --mute-contrast: #9B9A97;
+    --secondary-text: #787774;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-main);
 }
 body {
     font-family: inter, sans-serif;

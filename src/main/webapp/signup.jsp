@@ -12,7 +12,7 @@
             <c:remove var="error" scope="session"/>
         </c:if>
     </div>
-    <form method="POST" action="auth" id="auth-form">
+    <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-form">
         <div class="con-wrapper">
             <label for="first_name">first Name</label>
             <div class="input-wrapper">

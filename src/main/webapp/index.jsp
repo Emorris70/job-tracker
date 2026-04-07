@@ -14,18 +14,18 @@
         </c:if>
     </div>
 
-    <form method="POST" action="auth" id="auth-exists">
+    <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-exists">
         <div class="con-wrapper">
             <label for="email">email</label>
             <div class="input-wrapper">
-                <img src="images/mail.png" alt="mail icon" />
+                <img src="${pageContext.request.contextPath}/images/mail.png" alt="mail icon" />
                 <input type="email" name="email" id="email" placeholder="name@host.com" />
             </div>
         </div>
         <div class="con-wrapper">
             <label for="password">password</label>
             <div class="input-wrapper">
-                <img src="images/lock-p.png" alt="lock icon" />
+                <img src="${pageContext.request.contextPath}/images/lock-p.png" alt="lock icon" />
                 <input
                         type="password"
                         name="password"
@@ -35,7 +35,7 @@
             </div>
         </div>
         <p class="dir-deco">
-            Don't have an account?<a href="auth?action=sign-up" id="sign-s">Sign up</a>
+            Don't have an account?<a href="${pageContext.request.contextPath}/auth?action=sign-up" id="sign-s">Sign up</a>
         </p>
         <div class="btn-container">
             <button
@@ -45,7 +45,7 @@
                     class="btn-submit">Login</button>
         </div>
         <p class="dir-deco center-i">
-            Forgot Password?<a href="auth?action=reset-pass" id="reset-s">Reset Password</a>
+            Forgot Password?<a href="${pageContext.request.contextPath}/auth?action=reset-pass" id="reset-s">Reset Password</a>
         </p>
     </form>
 </main>
