@@ -1,4 +1,4 @@
-<jsp:include page="taglib.jsp"/>
+<%@ include file="taglib.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <jsp:include page="auth_head.jsp"/>

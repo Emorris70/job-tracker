@@ -1,4 +1,4 @@
-<jsp:include page="taglib.jsp"/>
+<%@ include file="taglib.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <jsp:include page="auth_head.jsp"/>
@@ -7,12 +7,12 @@
 <main class="container">
     <h1 class="m-h">Welcome Back!</h1>
 
-    <div class="errorMsg">
-        <c:if test="${not empty sessionScope.error}">
+    <c:if test="${not empty sessionScope.error}">
+        <div class="errorMsg">
             <p class="error-msg">${sessionScope.error}</p>
-            <c:remove var="error" scope="session"/>
-        </c:if>
-    </div>
+        </div>
+        <c:remove var="error" scope="session"/>
+    </c:if>
 
     <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-exists">
         <div class="con-wrapper">
