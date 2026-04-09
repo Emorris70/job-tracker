@@ -7,11 +7,17 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 65px;
-    padding: 1.625rem;
+    padding: 0.625rem;
     border-bottom: 0.5px solid rgba(0, 0, 0, 0.10);
     background: #FFF;
     gap: 5px;
     overflow: hidden;
+}
+main {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 40px 20px;
 }
 .user-content {
     display: flex;
@@ -34,23 +40,176 @@ header {
 .svg-color-c {
     fill: var(--text-main) !important;
 }
-.user-logout {
+.user-logout, .btn-container {
     cursor: pointer;
     border: 1px solid #E0E0E0;
     border-radius: 4px;
     padding: 0.313rem 0.625rem;
+    transition: all 0.2s ease;
 }
-.user-logout a {
+.user-logout a, .btn-container span {
     color: var(--text-main);
 }
-.user-logout:active {
+.user-logout:active, .btn-container:active {
     transform: scale(0.95);
 }
-.user-logout:hover {
+.user-logout:hover, .btn-container:hover {
     background: var(--bg-secondary);
 }
 .main-header {
     text-align: center;
     font-size: 22px;
     font-weight: 600;
+}
+.h-2 {
+    font-size: 28px;
+    font-weight: 500;
+}
+.s-p {
+   color: var(--secondary-text);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 900px;
+    gap: 24px;
+}
+
+.m-c-head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+}
+.c-head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.main-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+    background-color: #FFF;
+    padding: 8px 15px;
+    transition: all 0.2s ease;
+}
+
+.cancel-c, .btn-container .svg-color-c:nth-child(3), #add-app-form {
+    display: none;
+}
+
+.container.form-open .add-app-c,
+.container.form-open .svg-color-c:nth-child(1) {
+    display: none;
+}
+
+.container.form-open .cancel-c,
+.container.form-open .svg-color-c:nth-child(3) {
+    display: inline-flex;
+}
+
+.container.form-open #add-app-form {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* The Card Container */
+.form-card {
+    width: 100%;
+    background: var(--bg-main);
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.app-grid-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--mute-contrast); /* Medium gray from Figma */
+    text-transform: uppercase;
+    letter-spacing: 0.02rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    background-color: #FBFBFA; /* Off-white background */
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2383E2; /* Blue accent */
+    background-color: var(--bg-main);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+    line-height: 1.5;
+}
+
+.form-footer {
+    grid-column: span 2;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+}
+
+.btn-primary {
+    background: var(--text-main);
+    color: var(--bg-main);
+    border: none;
+    border-radius: 5px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover {
+    background: #45433f;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
 }
