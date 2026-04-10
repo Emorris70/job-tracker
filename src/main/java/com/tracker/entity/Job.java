@@ -15,10 +15,7 @@ public class Job {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "user_id", nullable = false)
-    private String userId; // Unique ID from AWS Cognito
+    private int id;
 
     @Column(name = "company_name", nullable = false)
     private String companyName;
@@ -44,6 +41,9 @@ public class Job {
     @Column(name = "date_applied")
     private LocalDate dateApplied = LocalDate.now();;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
     /**
      * Instantiates a new Job object.
      */
@@ -51,31 +51,45 @@ public class Job {
     }
 
     /**
-     * Overloaded constructor for quick initialization of core job details.
-     * @param userId The unique identifier from Cognito.
-     * @param companyName Name of the hiring company.
-     * @param jobTitle Title of the position.
+     * Instantiates a new Job object.
+     * And initializes the unique identifier.
+     *
+     * @param user the user who applied for the job.
+     * @param companyName the company name.
+     * @param jobTitle the job title.
+     * @param location the location.
+     * @param salaryRange the salary range.
+     * @param status the status.
+     * @param jobUrl the job url.
+     * @param notes the notes.
      */
-    public Job(String userId, String companyName, String jobTitle) {
-        this.userId = userId;
+    public Job( User user, String companyName, String jobTitle, String location,
+               String salaryRange, String status, String jobUrl, String notes)
+    {
+        this.user = user;
         this.companyName = companyName;
         this.jobTitle = jobTitle;
+        this.location = location;
+        this.salaryRange = salaryRange;
+        this.status = status;
+        this.jobUrl = jobUrl;
+        this.notes = notes;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getCompanyName() {
@@ -146,7 +160,7 @@ public class Job {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Job job = (Job) o;
-        return Objects.equals(id, job.id) && Objects.equals(userId, job.userId)
+        return Objects.equals(id, job.id) && Objects.equals(user, job.user)
                 && Objects.equals(companyName, job.companyName)
                 && Objects.equals(jobTitle, job.jobTitle)
                 && Objects.equals(location, job.location)
@@ -158,7 +172,7 @@ public class Job {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, companyName,
+        return Objects.hash(id, user, companyName,
                 jobTitle, location, salaryRange, status,
                 jobUrl, notes, dateApplied, dateApplied);
     }
