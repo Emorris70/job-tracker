@@ -11,8 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9573e47b-8e41-4860-b0ac-c41935902eaa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/head.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/head.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/home.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/test.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +24,7 @@
     <execution />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="56" />
+    <option name="cachedIndexableFilesCount" value="57" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -246,7 +247,7 @@
       <workItem from="1775498431317" duration="14071000" />
       <workItem from="1775581118534" duration="569000" />
       <workItem from="1775690043200" duration="587000" />
-      <workItem from="1775751109132" duration="8447000" />
+      <workItem from="1775751109132" duration="13304000" />
     </task>
     <servers />
   </component>

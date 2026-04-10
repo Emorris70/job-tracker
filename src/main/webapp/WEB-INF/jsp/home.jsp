@@ -20,9 +20,77 @@
         </div>
     </div>
 </header>
-
 <main>
+    <div class="container">
 
+        <div class="m-c-head">
+            <div class="c-head">
+                <h2 class="h-2">Job Applications</h2>
+                <p class="s-p">Track your job search progress</p>
+            </div>
+            <!--     Once this btn is press it changes the content to display the cancel element and if the cancel element is pressed it changes the content back to display the add element.       -->
+            <div class="btn-container main-btn">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="img-d svg-color-c"
+                     viewBox="0 -960 960 960"
+                     fill="#e3e3e3">
+                    <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                <span class="add-app-c">
+                    New Application
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="img-d svg-color-c"
+                     viewBox="0 -960 960 960"
+                     fill="#e3e3e">
+                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+                <span class="cancel-c">
+                    Cancel
+                </span>
+            </div>
+        </div>
+        <div class="form-card" id="add-app-form">
+            <form action="${pageContext.request.contextPath}/add" method="POST" class="app-grid-form">
+                <div class="form-group">
+                    <label>Company</label>
+                    <input type="text" name="company" placeholder="e.g. Google" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Position</label>
+                    <input type="text" name="position" placeholder="e.g. Software Engineer" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Status</label>
+                    <select name="status">
+                        <option value="Applied">Applied</option>
+                        <option value="Interviewing">Interviewing</option>
+                        <option value="Offer">Offer</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Date Applied</label>
+                    <input type="date" name="dateApplied" value="2026-04-09">
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Link</label>
+                    <input type="url" name="link" placeholder="https://...">
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Description</label>
+                    <textarea name="description" rows="3" placeholder="Job requirements, tech stack..."></textarea>
+                </div>
+
+                <div class="form-footer">
+                    <button type="submit" class="btn-primary">Add Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </main>
 
 <footer>

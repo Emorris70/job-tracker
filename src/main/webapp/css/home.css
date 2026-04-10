@@ -17,7 +17,7 @@ main {
     display: flex;
     justify-content: center;
     width: 100%;
-    padding: 40px 20px;
+    padding: 20px 15px;
 }
 .user-content {
     display: flex;
@@ -125,8 +125,7 @@ main {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
-
-/* The Card Container */
+/* --- The Card Container --- */
 .form-card {
     width: 100%;
     background: var(--bg-main);
@@ -136,26 +135,29 @@ main {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
+/* --- Base Form Grid (Strictly Mobile-First Column) --- */
 .app-grid-form {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    grid-template-columns: 1fr; /* Forces every element into one column */
+    gap: 1.25rem;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
 }
 
-.full-width {
-    grid-column: span 2;
+/* On mobile, even full-width elements and the footer stay in column 1 */
+.full-width,
+.form-footer {
+    grid-column: 1;
 }
 
 .form-group label {
     font-size: 0.8rem;
     font-weight: 600;
-    color: var(--mute-contrast); /* Medium gray from Figma */
+    color: var(--mute-contrast);
     text-transform: uppercase;
     letter-spacing: 0.02rem;
 }
@@ -164,20 +166,20 @@ main {
 .form-group select,
 .form-group textarea {
     width: 100%;
-    padding: 10px 12px;
+    padding: 10px;
     border: 1px solid #E0E0E0;
     border-radius: 4px;
-    font-size: 0.95rem;
     color: var(--text-main);
-    background-color: #FBFBFA; /* Off-white background */
+    background-color: #FBFBFA;
     transition: border-color 0.2s, background-color 0.2s;
+    /*font-size: 16px; !* Prevents auto-zoom on mobile devices *!*/
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #2383E2; /* Blue accent */
+    border-color: #2383E2;
     background-color: var(--bg-main);
 }
 
@@ -188,7 +190,6 @@ main {
 }
 
 .form-footer {
-    grid-column: span 2;
     display: flex;
     justify-content: flex-end;
     margin-top: 0.5rem;
@@ -212,4 +213,37 @@ main {
 
 .btn-primary:active {
     transform: scale(0.98);
+}
+
+/* --- Desktop Layout (Row-Based) --- */
+@media (min-width: 600px) {
+    .app-grid-form {
+        grid-template-columns: 1fr 1fr; /* Enables the two-column row */
+    }
+
+    .full-width,
+    .form-footer {
+        grid-column: span 2; /* Spans across the rows */
+    }
+}
+
+/* --- Mobile Specific Tweaks (Under 480px) --- */
+@media (max-width: 480px) {
+    .form-card {
+        padding: 1.25rem;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    main {
+        padding: 20px 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    main {
+        padding: 40px 20px;
+    }
 }
