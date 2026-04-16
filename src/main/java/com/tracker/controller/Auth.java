@@ -1,7 +1,9 @@
 package com.tracker.controller;
 
 import com.tracker.entity.AuthenticatedUser;
+import com.tracker.entity.User;
 import com.tracker.persistence.CognitoAuthService;
+import com.tracker.persistence.GenericDao;
 import com.tracker.persistence.TokenVerifier;
 import jakarta.servlet.RequestDispatcher;
 
@@ -96,7 +98,10 @@ public class Auth extends HttpServlet {
             String password = req.getParameter("password");
 
             try {
-                cognitoAuth.register(firstName, email, password);
+                GenericDao<User> userDao = new GenericDao<>(User.class);
+                String sub = cognitoAuth.register(firstName, email, password);
+
+                userDao.insert(new User(sub));
 
                 session.setAttribute("pendingConfirmEmail", email);
                 session.setAttribute("title", "confirm - Job Tracker");
@@ -155,10 +160,14 @@ public class Auth extends HttpServlet {
             try {
 
                 AuthenticationResultType result = cognitoAuth.login(email, password);
+                AuthenticatedUser authUser = tokenVerifier.verify(result.idToken());
 
-                AuthenticatedUser user = tokenVerifier.verify(result.idToken());
+                GenericDao<User> userDao = new GenericDao<>(User.class);
 
-                session.setAttribute("user", user);
+                User dbUser = userDao.findBy("sub", authUser.getSub()).get(0);
+
+                session.setAttribute("user", authUser);
+                session.setAttribute("dbUser", dbUser);
 
                 resp.sendRedirect(req.getContextPath() + "/home");
 

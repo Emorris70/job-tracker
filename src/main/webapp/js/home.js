@@ -17,7 +17,7 @@ const handleAddButton = () => {
     const toggleBtn = document.querySelector('.main-btn');
 
     toggleBtn.addEventListener('click', () => {
-        // This one line handles the text swap, icon swap, and form visibility
+
         container.classList.toggle('form-open');
     });
 }

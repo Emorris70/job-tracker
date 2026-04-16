@@ -105,6 +105,23 @@ public class GenericDao<T> {
     }
 
     /**
+     * Find entities by a field and value.
+     *
+     * @param field the field to search by.
+     * @param value the value to search for.
+     * @return a list of entities
+     */
+    public List<T> findBy(String field, Object value) {
+        return executeWithSession(session -> {
+            HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<T> query = builder.createQuery(type);
+            var root = query.from(type);
+            query.where(builder.equal(root.get(field), value));
+            return session.createSelectionQuery(query).getResultList();
+        });
+    }
+
+    /**
      * Wraps a database operation within a Hibernate session and transaction.
      * This method ensures that the transaction is committed on success,
      * rolled back on failure, and the session is always closed.
