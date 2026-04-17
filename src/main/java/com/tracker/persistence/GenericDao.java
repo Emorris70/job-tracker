@@ -130,7 +130,7 @@ public class GenericDao<T> {
      * @param <R> the return type produced by the action.
      * @return the result in which the calling method would like to return.
      */
-    private <R> R executeWithSession(Function<Session, R> action) {
+    protected <R> R executeWithSession(Function<Session, R> action) {
         Session session = getSession();
         Transaction transaction = null;
         try {
