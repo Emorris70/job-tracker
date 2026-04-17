@@ -43,7 +43,7 @@ main {
 }
 .user-logout, .btn-container {
     cursor: pointer;
-    border: 1px solid #E0E0E0;
+    border: 1px solid var(--border-light);
     border-radius: 4px;
     padding: 0.313rem 0.625rem;
     transition: all 0.2s ease;
@@ -54,7 +54,7 @@ main {
 .user-logout:active, .btn-container:active {
     transform: scale(0.95);
 }
-.user-logout:hover, .btn-container:hover {
+.user-logout:hover, .btn-container:hover, .card-parent:hover {
     background: var(--bg-secondary);
 }
 .main-header {
@@ -173,7 +173,6 @@ main {
     color: var(--text-main);
     background-color: #FBFBFA;
     transition: border-color 0.2s, background-color 0.2s;
-    /*font-size: 16px; !* Prevents auto-zoom on mobile devices *!*/
 }
 
 .form-group input:focus,
@@ -215,7 +214,94 @@ main {
 .btn-primary:active {
     transform: scale(0.98);
 }
+.card-parent {
+    display: flex;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    /*height: auto;*/
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.card-head-parent {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.card-h2 {
+    margin: 0;
+    line-height: 1.2;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+.company-name {
+    font-weight: 500;
+    color: var(--secondary-text);
+}
+.meta-icon {
+    width: var(--xxsmall-icon-size);
+    height: var(--xxsmall-icon-size);
+}
+.card-pill-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.813rem;
+    white-space: nowrap;
+    height: fit-content;
+    border: 1px solid var(--border-light);
+}
+.card-meta-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.meta-item {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 2px;
+}
+.card-meta-info .meta-item span {
+    color: var(--secondary-text);
+}
+.card-content-parent {
+    display: flex;
+    flex-direction: column;
+}
+.card-description {
+    color: var(--secondary-text);
+    line-height: 1.4;
+    display: flex;
+    flex-wrap: wrap;
+}
+/* Color variations based on status */
+.status-applied {
+    background-color: #D3E5EF; /* Light Blue */
+    color: #18445E;
+}
 
+.status-interviewing {
+    background-color: #FDECC8; /* Light Yellow */
+    color: #403211;
+}
+
+.status-offer {
+    background-color: #DBEDDB; /* Light Green */
+    color: #1C3829;
+}
+
+.status-rejected {
+    background-color: #E9E9E6; /* Light Gray */
+    color: #5F5E5B;
+}
 /* --- Desktop Layout (Row-Based) --- */
 @media (min-width: 600px) {
     .app-grid-form {

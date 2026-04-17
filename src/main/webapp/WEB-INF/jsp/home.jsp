@@ -1,7 +1,7 @@
-<%@ include file="/taglib.jsp"%>
+<%@ include file="/WEB-INF/jsp/includes/taglib.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<jsp:include page="head.jsp"/>
+<jsp:include page="includes/head.jsp"/>
 <body>
 <header>
     <h1 class="main-header">Job Tracker</h1>
@@ -51,12 +51,12 @@
         <div class="form-card" id="add-app-form">
             <form action="${pageContext.request.contextPath}/add" method="POST" class="app-grid-form">
                 <div class="form-group">
-                    <label>Company</label>
+                    <label id="company">Company</label>
                     <input type="text" name="company" placeholder="e.g. Google" required>
                 </div>
 
                 <div class="form-group">
-                    <label>Position</label>
+                    <label id="position">Position</label>
                     <input type="text" name="position" placeholder="e.g. Software Engineer" required>
                 </div>
 
@@ -71,17 +71,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Date Applied</label>
+                    <label id="dateApplied">Date Applied</label>
                     <input type="date" name="dateApplied" value="2026-04-09">
                 </div>
 
                 <div class="form-group full-width">
-                    <label>Link</label>
+                    <label id="link">Link</label>
                     <input type="url" name="link" placeholder="https://...">
                 </div>
 
                 <div class="form-group full-width">
-                    <label>Description</label>
+                    <label id="description">Description</label>
                     <textarea name="description" rows="3" placeholder="Job requirements, tech stack..."></textarea>
                 </div>
 
@@ -89,6 +89,38 @@
                     <button type="submit" class="btn-primary">Add Application</button>
                 </div>
             </form>
+        </div>
+        <div class="card-parent" data-id="">
+            <div class="card-head-parent">
+                <div class="card-head-content">
+                    <h2 class="card-h2">Senior Frontend Developer</h2>
+                    <p class="company-name">Tech Corp</p>
+                </div>
+                <span class="card-pill-status status-${fn:toLowerCase(sessionScope.job.status)}">
+                    ${sessionScope.job.status}
+                </span>
+            </div>
+
+            <div class="card-meta-info">
+                <div class="meta-item">
+                    <img src="${pageContext.request.contextPath}/images/location.png" alt="location icon" class="meta-icon">
+                    <span>Madison, WI</span>
+                </div>
+                <div class="meta-item">
+                    <img src="${pageContext.request.contextPath}/images/dollar-sign.png" alt="dollar sign icon" class="meta-icon">
+                    <span>$70k - $90k</span>
+                </div>
+                <div class="meta-item">
+                    <img src="${pageContext.request.contextPath}/images/calendar.png" alt="calendar icon" class="meta-icon">
+                    <span>Applied Apr 16, 2026</span>
+                </div>
+            </div>
+
+            <div class="card-content-parent">
+                <div class="card-description">
+                    Working with the engineering team to build scalable Java web applications...
+                </div>
+            </div>
         </div>
     </div>
 </main>
