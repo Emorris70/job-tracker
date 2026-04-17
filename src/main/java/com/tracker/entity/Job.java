@@ -162,19 +162,20 @@ public class Job {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Job job = (Job) o;
-        return Objects.equals(id, job.id) && Objects.equals(user, job.user)
-                && Objects.equals(companyName, job.companyName)
+        return id == job.id && Objects.equals(companyName, job.companyName)
                 && Objects.equals(jobTitle, job.jobTitle)
                 && Objects.equals(location, job.location)
                 && Objects.equals(salaryRange, job.salaryRange)
-                && Objects.equals(status, job.status) && Objects.equals(jobUrl, job.jobUrl)
-                && Objects.equals(dateApplied, job.dateApplied);
+                && Objects.equals(status, job.status)
+                && Objects.equals(jobUrl, job.jobUrl)
+                && Objects.equals(dateApplied, job.dateApplied)
+                && Objects.equals(description, job.description)
+                && Objects.equals(user, job.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, companyName,
-                jobTitle, location, salaryRange, status,
-                jobUrl, dateApplied, dateApplied);
+        return Objects.hash(id, companyName, jobTitle, location,
+                salaryRange, status, jobUrl, dateApplied, description, user);
     }
 }

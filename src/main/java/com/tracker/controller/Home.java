@@ -39,6 +39,7 @@ public class Home extends HttpServlet {
         HttpSession session = req.getSession(false);
 
         if (session == null || session.getAttribute("user") == null) {
+            log.warn("Unauthorized access attempt to home page.");
             resp.sendRedirect(req.getContextPath() + "/index.jsp");
             return;
         }

@@ -82,7 +82,7 @@
 
                 <div class="form-group">
                     <label>Date Applied <span class="required-star">*</span></label>
-                    <input type="date" name="dateApplied" value="2026-04-17" required>
+                    <input type="date" name="dateApplied" required>
                 </div>
 
                 <div class="form-group full-width">

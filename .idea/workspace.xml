@@ -11,15 +11,10 @@
   <component name="ChangeListManager">
     <list default="true" id="9573e47b-8e41-4860-b0ac-c41935902eaa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Add.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Home.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/entity/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/entity/Job.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/includes/taglib.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/includes/taglib.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/images/calendar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/images/calendar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/images/location.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/images/location.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/test.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +25,7 @@
     <execution />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="66" />
+    <option name="cachedIndexableFilesCount" value="68" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -290,7 +285,7 @@
       <workItem from="1776349078135" duration="3023000" />
       <workItem from="1776352195735" duration="302000" />
       <workItem from="1776352535614" duration="12902000" />
-      <workItem from="1776435960976" duration="7895000" />
+      <workItem from="1776435960976" duration="13573000" />
     </task>
     <servers />
   </component>
