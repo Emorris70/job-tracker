@@ -49,6 +49,12 @@
             </div>
         </div>
         <div class="form-card" id="add-app-form">
+            <c:if test="${not empty sessionScope.error}">
+                <div class="errorMsg">
+                    <p class="error-msg">${sessionScope.error}</p>
+                </div>
+                <c:remove var="error" scope="session"/>
+            </c:if>
             <form action="${pageContext.request.contextPath}/add" method="POST" class="app-grid-form">
                 <div class="form-group">
                     <label>Company <span class="required-star">*</span></label>

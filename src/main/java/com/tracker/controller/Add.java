@@ -27,11 +27,12 @@ public class Add  extends HttpServlet{
     }
 
     /**
+     * Handles the POST request to add a new job.
      *
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
+     * @param req Clients request.
+     * @param resp Server response.
+     * @throws ServletException If a servlet exception occurs.
+     * @throws IOException If an Input/Output exception occurs.
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -43,7 +44,7 @@ public class Add  extends HttpServlet{
             return;
         }
 
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("dbUser");
 
         String company = req.getParameter("companyName");
         String title = req.getParameter("jobTitle");

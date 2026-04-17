@@ -135,7 +135,6 @@ public class Auth extends HttpServlet {
             try {
                 cognitoAuth.confirmSignUp(email, code);
 
-                // clean up
                 session.removeAttribute("pendingConfirmEmail");
                 resp.sendRedirect("index.jsp");
 
@@ -166,7 +165,9 @@ public class Auth extends HttpServlet {
 
                 User dbUser = userDao.findBy("sub", authUser.getSub()).get(0);
 
+                // Used to extract claims from the JWT
                 session.setAttribute("user", authUser);
+                // To perform internal operations on the specific user
                 session.setAttribute("dbUser", dbUser);
 
                 resp.sendRedirect(req.getContextPath() + "/home");
