@@ -40,10 +40,11 @@ public class Home extends HttpServlet {
 
         if (session == null || session.getAttribute("user") == null) {
             resp.sendRedirect(req.getContextPath() + "/index.jsp");
-        } else {
-            log.info("Authenticated user forward back to home");
-            session.setAttribute("page", "Home - Job Tracker");
-            req.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(req, resp);
+            return;
         }
+
+        log.info("Authenticated user forward back to home");
+        session.setAttribute("page", "Home - Job Tracker");
+        req.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(req, resp);
     }
 }

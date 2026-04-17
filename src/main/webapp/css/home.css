@@ -302,6 +302,43 @@ main {
     background-color: #E9E9E6; /* Light Gray */
     color: #5F5E5B;
 }
+
+.empty-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 20px;
+    color: var(--text-main);
+    font-weight: 400;
+    text-align: center;
+    border: 2px dashed var(--border-light);
+    border-radius: 8px;
+    margin-top: 20px;
+}
+.required-star {
+    color: #EB5757;
+    margin-left: 2px;
+    font-weight: bold;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #787774;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+/* When a 'required' field is empty and the user tries to submit */
+/*input:invalid:focus,*/
+/*select:invalid:focus,*/
+/*textarea:invalid:focus {*/
+/*    border: 1px solid #EB5757 !important; !* Notion Error Red *!*/
+/*    background-color: #FFF5F5 !important;*/
+/*    outline: none !important;*/
+/*    box-shadow: 0 0 0 2px rgba(235, 87, 87, 0.1) !important;*/
+/*}*/
 /* --- Desktop Layout (Row-Based) --- */
 @media (min-width: 600px) {
     .app-grid-form {

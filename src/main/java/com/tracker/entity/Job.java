@@ -35,13 +35,14 @@ public class Job {
     @Column(name = "job_url", columnDefinition = "TEXT")
     private String jobUrl;
 
-    @Column(columnDefinition = "TEXT")
-    private String notes;
-
     @Column(name = "date_applied")
-    private LocalDate dateApplied = LocalDate.now();;
+    private LocalDate dateApplied = LocalDate.now();
+
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
     /**
@@ -61,10 +62,10 @@ public class Job {
      * @param salaryRange the salary range.
      * @param status the status.
      * @param jobUrl the job url.
-     * @param notes the notes.
      */
     public Job( User user, String companyName, String jobTitle, String location,
-               String salaryRange, String status, String jobUrl, String notes)
+               String salaryRange, String status, String jobUrl,
+                String description, LocalDate dateApplied)
     {
         this.user = user;
         this.companyName = companyName;
@@ -73,7 +74,8 @@ public class Job {
         this.salaryRange = salaryRange;
         this.status = status;
         this.jobUrl = jobUrl;
-        this.notes = notes;
+        this.description = description;
+        this.dateApplied = dateApplied;
     }
 
     public int getId() {
@@ -140,20 +142,20 @@ public class Job {
         this.jobUrl = jobUrl;
     }
 
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
     public LocalDate getDateApplied() {
         return dateApplied;
     }
 
     public void setDateApplied(LocalDate dateApplied) {
         this.dateApplied = dateApplied;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -166,7 +168,6 @@ public class Job {
                 && Objects.equals(location, job.location)
                 && Objects.equals(salaryRange, job.salaryRange)
                 && Objects.equals(status, job.status) && Objects.equals(jobUrl, job.jobUrl)
-                && Objects.equals(notes, job.notes)
                 && Objects.equals(dateApplied, job.dateApplied);
     }
 
@@ -174,6 +175,6 @@ public class Job {
     public int hashCode() {
         return Objects.hash(id, user, companyName,
                 jobTitle, location, salaryRange, status,
-                jobUrl, notes, dateApplied, dateApplied);
+                jobUrl, dateApplied, dateApplied);
     }
 }

@@ -57,18 +57,28 @@
         <div class="form-card" id="add-app-form">
             <form action="${pageContext.request.contextPath}/add" method="POST" class="app-grid-form">
                 <div class="form-group">
-                    <label>Company</label>
-                    <input type="text" name="company" placeholder="e.g. Google" required>
+                    <label>Company <span class="required-star">*</span></label>
+                    <input type="text" name="companyName" placeholder="e.g. Google" required>
                 </div>
 
                 <div class="form-group">
-                    <label>Position</label>
-                    <input type="text" name="position" placeholder="e.g. Software Engineer" required>
+                    <label>Position <span class="required-star">*</span></label>
+                    <input type="text" name="jobTitle" placeholder="e.g. Software Engineer" required>
                 </div>
 
                 <div class="form-group">
-                    <label>Status</label>
-                    <select name="status">
+                    <label>Location<span class="required-star">*</span></label>
+                    <input type="text" name="location" placeholder="e.g. Madison, WI" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Salary Range<span class="required-star">*</span></label>
+                    <input type="text" name="salaryRange" placeholder="e.g. $70k - $90k" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Status<span class="required-star">*</span></label>
+                    <select name="status" required>
                         <option value="Applied">Applied</option>
                         <option value="Interviewing">Interviewing</option>
                         <option value="Offer">Offer</option>
@@ -77,17 +87,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Date Applied</label>
-                    <input type="date" name="dateApplied" value="2026-04-09">
+                    <label>Date Applied <span class="required-star">*</span></label>
+                    <input type="date" name="dateApplied" value="2026-04-17" required>
                 </div>
 
                 <div class="form-group full-width">
                     <label>Link</label>
-                    <input type="url" name="link" placeholder="https://...">
+                    <input type="url" name="jobUrl" placeholder="https://...">
                 </div>
 
                 <div class="form-group full-width">
-                    <label id="description">Description</label>
+                    <label>Description</label>
                     <textarea name="description" rows="3" placeholder="Job requirements, tech stack..."></textarea>
                 </div>
 
@@ -127,6 +137,9 @@
                     Working with the engineering team to build scalable Java web applications...
                 </div>
             </div>
+        </div>
+        <div class="empty-state">
+            <p>No Applications Yet – Click above to get started!</p>
         </div>
     </div>
 </main>

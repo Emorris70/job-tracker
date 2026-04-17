@@ -26,7 +26,6 @@ body {
 a {
     text-decoration: none;
 }
-/* Base Card Style from Figma */
 .job-card {
     border: 1px solid var(--border-light);
     border-radius: 8px;

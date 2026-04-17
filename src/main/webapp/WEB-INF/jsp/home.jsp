@@ -28,7 +28,7 @@
                 <h2 class="h-2">Job Applications</h2>
                 <p class="s-p">Track your job search progress</p>
             </div>
-            <!--     Once this btn is press it changes the content to display the cancel element and if the cancel element is pressed it changes the content back to display the add element.       -->
+
             <div class="btn-container main-btn">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      class="img-d svg-color-c"
@@ -51,18 +51,28 @@
         <div class="form-card" id="add-app-form">
             <form action="${pageContext.request.contextPath}/add" method="POST" class="app-grid-form">
                 <div class="form-group">
-                    <label id="company">Company</label>
-                    <input type="text" name="company" placeholder="e.g. Google" required>
+                    <label>Company <span class="required-star">*</span></label>
+                    <input type="text" name="companyName" placeholder="e.g. Google" required>
                 </div>
 
                 <div class="form-group">
-                    <label id="position">Position</label>
-                    <input type="text" name="position" placeholder="e.g. Software Engineer" required>
+                    <label>Position <span class="required-star">*</span></label>
+                    <input type="text" name="jobTitle" placeholder="e.g. Software Engineer" required>
                 </div>
 
                 <div class="form-group">
-                    <label>Status</label>
-                    <select name="status">
+                    <label>Location<span class="required-star">*</span></label>
+                    <input type="text" name="location" placeholder="e.g. Madison, WI" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Salary Range<span class="required-star">*</span></label>
+                    <input type="text" name="salaryRange" placeholder="e.g. $70k - $90k" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Status<span class="required-star">*</span></label>
+                    <select name="status" required>
                         <option value="Applied">Applied</option>
                         <option value="Interviewing">Interviewing</option>
                         <option value="Offer">Offer</option>
@@ -71,17 +81,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label id="dateApplied">Date Applied</label>
-                    <input type="date" name="dateApplied" value="2026-04-09">
+                    <label>Date Applied <span class="required-star">*</span></label>
+                    <input type="date" name="dateApplied" value="2026-04-17" required>
                 </div>
 
                 <div class="form-group full-width">
-                    <label id="link">Link</label>
-                    <input type="url" name="link" placeholder="https://...">
+                    <label>Link</label>
+                    <input type="url" name="jobUrl" placeholder="https://...">
                 </div>
 
                 <div class="form-group full-width">
-                    <label id="description">Description</label>
+                    <label>Description</label>
                     <textarea name="description" rows="3" placeholder="Job requirements, tech stack..."></textarea>
                 </div>
 
@@ -90,38 +100,49 @@
                 </div>
             </form>
         </div>
-        <div class="card-parent" data-id="">
-            <div class="card-head-parent">
-                <div class="card-head-content">
-                    <h2 class="card-h2">Senior Frontend Developer</h2>
-                    <p class="company-name">Tech Corp</p>
-                </div>
-                <span class="card-pill-status status-${fn:toLowerCase(sessionScope.job.status)}">
-                    ${sessionScope.job.status}
-                </span>
-            </div>
+        <c:choose>
+            <c:when test="${not empty jobs}">
+                <c:forEach var="job" items="${jobs}">
+                    <div class="card-parent" data-id="${job.id}">
+                        <div class="card-head-parent">
+                            <div class="card-head-content">
+                                <h2 class="card-h2">${job.jobTitle}</h2>
+                                <p class="company-name">${job.companyName}</p>
+                            </div>
+                            <span class="card-pill-status status-${fn:toLowerCase(job.status)}">
+                                    ${job.status}
+                            </span>
+                        </div>
 
-            <div class="card-meta-info">
-                <div class="meta-item">
-                    <img src="${pageContext.request.contextPath}/images/location.png" alt="location icon" class="meta-icon">
-                    <span>Madison, WI</span>
-                </div>
-                <div class="meta-item">
-                    <img src="${pageContext.request.contextPath}/images/dollar-sign.png" alt="dollar sign icon" class="meta-icon">
-                    <span>$70k - $90k</span>
-                </div>
-                <div class="meta-item">
-                    <img src="${pageContext.request.contextPath}/images/calendar.png" alt="calendar icon" class="meta-icon">
-                    <span>Applied Apr 16, 2026</span>
-                </div>
-            </div>
+                        <div class="card-meta-info">
+                            <div class="meta-item">
+                                <img src="${pageContext.request.contextPath}/images/location.png" alt="location" class="meta-icon">
+                                <span>${job.location}</span>
+                            </div>
+                            <div class="meta-item">
+                                <img src="${pageContext.request.contextPath}/images/dollar-sign.png" alt="salary" class="meta-icon">
+                                <span>${job.salaryRange}</span>
+                            </div>
+                            <div class="meta-item">
+                                <img src="${pageContext.request.contextPath}/images/calendar.png" alt="date" class="meta-icon">
+                                <span>${job.dateApplied}</span>
+                            </div>
+                        </div>
 
-            <div class="card-content-parent">
-                <div class="card-description">
-                    Working with the engineering team to build scalable Java web applications...
+                        <div class="card-content-parent">
+                            <div class="card-description">
+                                    ${fn:substring(job.description, 0, 100)}${fn:length(job.description) > 100 ? '...' : ''}
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <div class="empty-state">
+                    <p>No Applications Yet – Click above to get started!!</p>
                 </div>
-            </div>
-        </div>
+            </c:otherwise>
+        </c:choose>
     </div>
 </main>
 
