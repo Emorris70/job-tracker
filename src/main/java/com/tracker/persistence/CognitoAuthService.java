@@ -160,4 +160,53 @@ public class CognitoAuthService {
 
         return response.authenticationResult();
     }
+
+    /**
+     * Initiates the forgot password flow by sending a reset code to the user's email.
+     *
+     * @param email the user's email address.
+     *
+     * @throws UserNotFoundException If no account exists with that email.
+     * @throws InvalidParameterException If the email is invalid or the user is not confirmed.
+     * @throws TooManyRequestsException If too many requests are made.
+     */
+    public void forgotPassword(String email)
+            throws UserNotFoundException, InvalidParameterException,
+            TooManyRequestsException, Exception
+    {
+        ForgotPasswordRequest request = ForgotPasswordRequest.builder()
+                .clientId(clientId)
+                .username(email)
+                .secretHash(computeSecretHash(email))
+                .build();
+
+        cognitoClient.forgotPassword(request);
+    }
+
+    /**
+     * Confirms the forgot password flow by submitting the reset code and new password.
+     *
+     * @param email the user's email address.
+     * @param code the verification code sent to the user's email.
+     * @param newPassword the new password to set.
+     *
+     * @throws CodeMismatchException If the code does not match.
+     * @throws ExpiredCodeException If the code has expired.
+     * @throws InvalidPasswordException If the new password doesn't meet policy requirements.
+     * @throws TooManyRequestsException If too many requests are made.
+     */
+    public void confirmForgotPassword(String email, String code, String newPassword)
+            throws CodeMismatchException, ExpiredCodeException,
+            InvalidPasswordException, TooManyRequestsException, Exception
+    {
+        ConfirmForgotPasswordRequest request = ConfirmForgotPasswordRequest.builder()
+                .clientId(clientId)
+                .username(email)
+                .confirmationCode(code)
+                .password(newPassword)
+                .secretHash(computeSecretHash(email))
+                .build();
+
+        cognitoClient.confirmForgotPassword(request);
+    }
 }

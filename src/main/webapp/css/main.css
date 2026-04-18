@@ -60,6 +60,20 @@ a {
     animation: shake 0.4s ease-in-out, fadeIn 0.3s ease-in;
 }
 
+.success-msg {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #1a7f37;
+    background-color: #f0faf3;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    text-align: center;
+    box-sizing: border-box;
+    animation: fadeIn 0.3s ease-in;
+}
+
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-5px); }

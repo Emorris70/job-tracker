@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="btn-container">
-            <button type="submit" class="btn-submit">
+            <button type="submit" name="action" value="forgotPassword" class="btn-submit">
                 Reset
             </button>
         </div>

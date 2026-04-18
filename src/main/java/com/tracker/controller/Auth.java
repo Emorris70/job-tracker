@@ -65,6 +65,10 @@ public class Auth extends HttpServlet {
             url = "/resetPassword.jsp";
             req.setAttribute("page", "Reset Password - Job Tracker");
 
+        } else if ("reset-pass-confirm".equals(req.getParameter("action"))) {
+            url = "/resetPasswordConfirm.jsp";
+            req.setAttribute("page", "Reset Password - Job Tracker");
+
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher(url);
@@ -187,6 +191,63 @@ public class Auth extends HttpServlet {
             } catch (Exception e) {
                 session.setAttribute("error", "Something went wrong please try again");
                 resp.sendRedirect("index.jsp");
+
+            }
+        } else if ("forgotPassword".equals(action)) {
+            String email = req.getParameter("email");
+
+            try {
+                cognitoAuth.forgotPassword(email);
+                session.setAttribute("resetEmail", email);
+                resp.sendRedirect("auth?action=reset-pass-confirm");
+
+            } catch (UserNotFoundException e) {
+                session.setAttribute("error", "No account found with that email");
+                resp.sendRedirect("resetPassword.jsp");
+
+            } catch (InvalidParameterException e) {
+                session.setAttribute("error", "Account not confirmed. Please verify your email first");
+                resp.sendRedirect("resetPassword.jsp");
+
+            } catch (TooManyRequestsException e) {
+                session.setAttribute("error", "Too many attempts, please try again later");
+                resp.sendRedirect("resetPassword.jsp");
+
+            } catch (Exception e) {
+                session.setAttribute("error", "Something went wrong please try again");
+                resp.sendRedirect("resetPassword.jsp");
+
+            }
+        } else if ("confirmForgotPassword".equals(action)) {
+            String email = (String) session.getAttribute("resetEmail");
+            String code = req.getParameter("v-code");
+            String newPassword = req.getParameter("password");
+
+            try {
+                cognitoAuth.confirmForgotPassword(email, code, newPassword);
+                session.removeAttribute("resetEmail");
+                session.setAttribute("successMsg", "Password reset successfully. Please log in.");
+                resp.sendRedirect("index.jsp");
+
+            } catch (CodeMismatchException e) {
+                session.setAttribute("error", "Invalid verification code");
+                resp.sendRedirect("auth?action=reset-pass-confirm");
+
+            } catch (ExpiredCodeException e) {
+                session.setAttribute("error", "Code has expired, please request a new one");
+                resp.sendRedirect("resetPassword.jsp");
+
+            } catch (InvalidPasswordException e) {
+                session.setAttribute("error", "Password does not meet requirements");
+                resp.sendRedirect("auth?action=reset-pass-confirm");
+
+            } catch (TooManyRequestsException e) {
+                session.setAttribute("error", "Too many attempts, please try again later");
+                resp.sendRedirect("auth?action=reset-pass-confirm");
+
+            } catch (Exception e) {
+                session.setAttribute("error", "Something went wrong please try again");
+                resp.sendRedirect("auth?action=reset-pass-confirm");
 
             }
         }

@@ -7,6 +7,12 @@
 <main class="container">
     <h1 class="m-h">Welcome Back!</h1>
 
+    <c:if test="${not empty sessionScope.successMsg}">
+        <div class="errorMsg">
+            <p class="success-msg">${sessionScope.successMsg}</p>
+        </div>
+        <c:remove var="successMsg" scope="session"/>
+    </c:if>
     <c:if test="${not empty sessionScope.error}">
         <div class="errorMsg">
             <p class="error-msg">${sessionScope.error}</p>
