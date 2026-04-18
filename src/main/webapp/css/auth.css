@@ -149,6 +149,23 @@ label {
 .s-p {
     max-width: 50%;
 }
+.s-p-2 {
+    max-width: 65%;
+}
+.reset-p-1 {
+    margin-top: 0 !important;
+}
+.c-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 5px;
+}
+.reset-form {
+    padding: 2.125rem;
+}
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -171,7 +188,6 @@ label {
     padding: 0.313rem 0.07rem !important;
 }
 .back-btn:hover {
-    border: 1.8px solid gray;
     color: black;
     background: rgba(128, 128, 128, 0.75);
 }

@@ -5,143 +5,171 @@
     <title>Title</title>
     <script src="js/home.js"></script>
     <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+<!--    <link rel="stylesheet" href="css/home.css" />-->
 </head>
 <body>
 <header>
-    <h1 class="main-header">Job Tracker</h1>
-    <div class="user-content">
-        <div class="user-info">
-<!--            <img src="${pageContext.request.contextPath}/images/home-user.png" alt="user icon">-->
-            <img src="images/home-user.png" alt="user icon" class="img-d">
-            <p class="user-email-d">${}</p>
-        </div>
-        <div class="user-logout">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="img-d svg-color-c"
-                 viewBox="0 -960 960 960"
-                 fill="#e3e3e3">
-                <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>
-            <a href="${pageContext.request.contextPath}/logout">Logout</a>
-        </div>
-    </div>
+<!--    <h1 class="main-header">Job Tracker</h1>-->
+<!--    <div class="user-content">-->
+<!--        <div class="user-info">-->
+<!--&lt;!&ndash;            <img src="${pageContext.request.contextPath}/images/home-user.png" alt="user icon">&ndash;&gt;-->
+<!--            <img src="images/home-user.png" alt="user icon" class="img-d">-->
+<!--            <p class="user-email-d">${}</p>-->
+<!--        </div>-->
+<!--        <div class="user-logout">-->
+<!--            <svg xmlns="http://www.w3.org/2000/svg"-->
+<!--                 class="img-d svg-color-c"-->
+<!--                 viewBox="0 -960 960 960"-->
+<!--                 fill="#e3e3e3">-->
+<!--                <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>-->
+<!--            <a href="${pageContext.request.contextPath}/logout">Logout</a>-->
+<!--        </div>-->
+<!--    </div>-->
 </header>
-<main>
-    <div class="container">
+<main class="container">
+<!--    <div class="container">-->
 
-        <div class="m-c-head">
-            <div class="c-head">
-                <h2 class="h-2">Job Applications</h2>
-                <p class="s-p">Track your job search progress</p>
-            </div>
-<!--     Once this btn is press it changes the content to display the cancel element and if the cancel element is pressed it changes the content back to display the add element.       -->
-            <div class="btn-container main-btn">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     class="img-d svg-color-c"
-                     viewBox="0 -960 960 960"
-                     fill="#e3e3e3">
-                    <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
-                <span class="add-app-c">
-                    New Application
-                </span>
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     class="img-d svg-color-c"
-                     viewBox="0 -960 960 960"
-                     fill="#e3e3e">
-                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-                <span class="cancel-c">
-                    Cancel
-                </span>
-            </div>
-        </div>
-        <div class="form-card" id="add-app-form">
-            <form action="${pageContext.request.contextPath}/add" method="POST" class="app-grid-form">
-                <div class="form-group">
-                    <label>Company <span class="required-star">*</span></label>
-                    <input type="text" name="companyName" placeholder="e.g. Google" required>
-                </div>
+<!--        <div class="m-c-head">-->
+<!--            <div class="c-head">-->
+<!--                <h2 class="h-2">Job Applications</h2>-->
+<!--                <p class="s-p">Track your job search progress</p>-->
+<!--            </div>-->
+<!--&lt;!&ndash;     Once this btn is press it changes the content to display the cancel element and if the cancel element is pressed it changes the content back to display the add element.       &ndash;&gt;-->
+<!--            <div class="btn-container main-btn">-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg"-->
+<!--                     class="img-d svg-color-c"-->
+<!--                     viewBox="0 -960 960 960"-->
+<!--                     fill="#e3e3e3">-->
+<!--                    <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>-->
+<!--                <span class="add-app-c">-->
+<!--                    New Application-->
+<!--                </span>-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg"-->
+<!--                     class="img-d svg-color-c"-->
+<!--                     viewBox="0 -960 960 960"-->
+<!--                     fill="#e3e3e">-->
+<!--                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>-->
+<!--                <span class="cancel-c">-->
+<!--                    Cancel-->
+<!--                </span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="form-card" id="add-app-form">-->
+<!--            <form action="${pageContext.request.contextPath}/add" method="POST" class="app-grid-form">-->
+<!--                <div class="form-group">-->
+<!--                    <label>Company <span class="required-star">*</span></label>-->
+<!--                    <input type="text" name="companyName" placeholder="e.g. Google" required>-->
+<!--                </div>-->
 
-                <div class="form-group">
-                    <label>Position <span class="required-star">*</span></label>
-                    <input type="text" name="jobTitle" placeholder="e.g. Software Engineer" required>
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <label>Position <span class="required-star">*</span></label>-->
+<!--                    <input type="text" name="jobTitle" placeholder="e.g. Software Engineer" required>-->
+<!--                </div>-->
 
-                <div class="form-group">
-                    <label>Location<span class="required-star">*</span></label>
-                    <input type="text" name="location" placeholder="e.g. Madison, WI" required>
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <label>Location<span class="required-star">*</span></label>-->
+<!--                    <input type="text" name="location" placeholder="e.g. Madison, WI" required>-->
+<!--                </div>-->
 
-                <div class="form-group">
-                    <label>Salary Range<span class="required-star">*</span></label>
-                    <input type="text" name="salaryRange" placeholder="e.g. $70k - $90k" required>
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <label>Salary Range<span class="required-star">*</span></label>-->
+<!--                    <input type="text" name="salaryRange" placeholder="e.g. $70k - $90k" required>-->
+<!--                </div>-->
 
-                <div class="form-group">
-                    <label>Status<span class="required-star">*</span></label>
-                    <select name="status" required>
-                        <option value="Applied">Applied</option>
-                        <option value="Interviewing">Interviewing</option>
-                        <option value="Offer">Offer</option>
-                        <option value="Rejected">Rejected</option>
-                    </select>
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <label>Status<span class="required-star">*</span></label>-->
+<!--                    <select name="status" required>-->
+<!--                        <option value="Applied">Applied</option>-->
+<!--                        <option value="Interviewing">Interviewing</option>-->
+<!--                        <option value="Offer">Offer</option>-->
+<!--                        <option value="Rejected">Rejected</option>-->
+<!--                    </select>-->
+<!--                </div>-->
 
-                <div class="form-group">
-                    <label>Date Applied <span class="required-star">*</span></label>
-                    <input type="date" name="dateApplied" value="2026-04-17" required>
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <label>Date Applied <span class="required-star">*</span></label>-->
+<!--                    <input type="date" name="dateApplied" value="2026-04-17" required>-->
+<!--                </div>-->
 
-                <div class="form-group full-width">
-                    <label>Link</label>
-                    <input type="url" name="jobUrl" placeholder="https://...">
-                </div>
+<!--                <div class="form-group full-width">-->
+<!--                    <label>Link</label>-->
+<!--                    <input type="url" name="jobUrl" placeholder="https://...">-->
+<!--                </div>-->
 
-                <div class="form-group full-width">
-                    <label>Description</label>
-                    <textarea name="description" rows="3" placeholder="Job requirements, tech stack..."></textarea>
-                </div>
+<!--                <div class="form-group full-width">-->
+<!--                    <label>Description</label>-->
+<!--                    <textarea name="description" rows="3" placeholder="Job requirements, tech stack..."></textarea>-->
+<!--                </div>-->
 
-                <div class="form-footer">
-                    <button type="submit" class="btn-primary">Add Application</button>
-                </div>
-            </form>
-        </div>
-        <div class="card-parent" data-id="${job.id}">
-            <div class="card-head-parent">
-                <div class="card-head-content">
-                    <h2 class="card-h2">Senior Frontend Developer</h2>
-                    <p class="company-name">Tech Corp</p>
-                </div>
-                <span class="card-pill-status status-${fn:toLowerCase(job.status)}">
-                    ${job.status}
-                </span>
-            </div>
+<!--                <div class="form-footer">-->
+<!--                    <button type="submit" class="btn-primary">Add Application</button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--        <div class="card-parent" data-id="${job.id}">-->
+<!--            <div class="card-head-parent">-->
+<!--                <div class="card-head-content">-->
+<!--                    <h2 class="card-h2">Senior Frontend Developer</h2>-->
+<!--                    <p class="company-name">Tech Corp</p>-->
+<!--                </div>-->
+<!--                <span class="card-pill-status status-${fn:toLowerCase(job.status)}">-->
+<!--                    ${job.status}-->
+<!--                </span>-->
+<!--            </div>-->
 
-            <div class="card-meta-info">
-                <div class="meta-item">
-                    <img src="images/location.png" alt="location icon" class="meta-icon">
-                    <span>Madison, WI</span>
-                </div>
-                <div class="meta-item">
-                    <img src="images/dollar-sign.png" alt="dollar sign icon" class="meta-icon">
-                    <span>$70k - $90k</span>
-                </div>
-                <div class="meta-item">
-                    <img src="images/calendar.png" alt="calendar icon" class="meta-icon">
-                    <span>Applied Apr 16, 2026</span>
-                </div>
-            </div>
+<!--            <div class="card-meta-info">-->
+<!--                <div class="meta-item">-->
+<!--                    <img src="images/location.png" alt="location icon" class="meta-icon">-->
+<!--                    <span>Madison, WI</span>-->
+<!--                </div>-->
+<!--                <div class="meta-item">-->
+<!--                    <img src="images/dollar-sign.png" alt="dollar sign icon" class="meta-icon">-->
+<!--                    <span>$70k - $90k</span>-->
+<!--                </div>-->
+<!--                <div class="meta-item">-->
+<!--                    <img src="images/calendar.png" alt="calendar icon" class="meta-icon">-->
+<!--                    <span>Applied Apr 16, 2026</span>-->
+<!--                </div>-->
+<!--            </div>-->
 
-            <div class="card-content-parent">
-                <div class="card-description">
-                    Working with the engineering team to build scalable Java web applications...
-                </div>
-            </div>
-        </div>
-        <div class="empty-state">
-            <p>No Applications Yet – Click above to get started!</p>
-        </div>
+<!--            <div class="card-content-parent">-->
+<!--                <div class="card-description">-->
+<!--                    Working with the engineering team to build scalable Java web applications...-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="empty-state">-->
+<!--            <p>No Applications Yet – Click above to get started!</p>-->
+<!--        </div>-->
+<!--    </div>-->
+    <div class="c-col">
+        <h1 class="m-h">Forgot Password?</h1>
+        <p class="p-deco reset-p-1">Enter your email to begin</p>
     </div>
+    <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-form" class="reset-form">
+        <div class="con-wrapper">
+            <label for="email">email</label>
+            <div class="input-wrapper">
+                <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="name@host.com"
+                        required
+                />
+                <img src="images/mail.png" alt="mail icon" />
+            </div>
+        </div>
+        <div class="btn-container">
+            <button type="submit" name="action" value="forgotPassword" class="btn-submit">
+                Reset
+            </button>
+        </div>
+        <p class="dir-deco center-i">
+            Back to<a href="auth?action=login">Login</a>
+        </p>
+    </form>
 </main>
 </body>
 </html>

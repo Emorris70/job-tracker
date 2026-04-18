@@ -5,7 +5,7 @@
 <body>
 <main class="container override-animation">
     <h1 class="m-h">Reset your Password</h1>
-    <p class="p-deco s-p">Enter the code sent to your email and choose a new password.</p>
+    <p class="p-deco s-p s-p-2">Enter the code sent to your email and choose a new password.</p>
     <div class="errorMsg">
         <c:if test="${not empty sessionScope.error}">
             <p class="error-msg">${sessionScope.error}</p>

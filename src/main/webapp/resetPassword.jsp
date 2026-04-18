@@ -4,15 +4,11 @@
 <jsp:include page="auth_head.jsp"/>
 <body>
 <main class="container">
-    <h1 class="m-h">Forgot Password?</h1>
-    <div class="errorMsg">
-        <c:if test="${not empty sessionScope.error}">
-            <p class="error-msg">${sessionScope.error}</p>
-            <c:remove var="error" scope="session"/>
-        </c:if>
+    <div class="c-col">
+        <h1 class="m-h">Forgot Password?</h1>
+        <p class="p-deco reset-p-1">Enter your email to begin</p>
     </div>
-    <p class="p-deco">Enter your email to receive a rest link</p>
-    <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-form">
+    <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-form" class="reset-form">
         <div class="con-wrapper">
             <label for="email">email</label>
             <div class="input-wrapper">
