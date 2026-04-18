@@ -58,22 +58,22 @@
             <form action="${pageContext.request.contextPath}/add" method="POST" class="app-grid-form">
                 <div class="form-group">
                     <label>Company <span class="required-star">*</span></label>
-                    <input type="text" name="companyName" placeholder="e.g. Google" required>
+                    <input type="text" name="companyName" placeholder="e.g. Google">
                 </div>
 
                 <div class="form-group">
                     <label>Position <span class="required-star">*</span></label>
-                    <input type="text" name="jobTitle" placeholder="e.g. Software Engineer" required>
+                    <input type="text" name="jobTitle" placeholder="e.g. Software Engineer">
                 </div>
 
                 <div class="form-group">
                     <label>Location<span class="required-star">*</span></label>
-                    <input type="text" name="location" placeholder="e.g. Madison, WI" required>
+                    <input type="text" name="location" placeholder="e.g. Madison, WI">
                 </div>
 
                 <div class="form-group">
                     <label>Salary Range<span class="required-star">*</span></label>
-                    <input type="text" name="salaryRange" placeholder="e.g. $70k - $90k" required>
+                    <input type="text" name="salaryRange" placeholder="e.g. $70k - $90k">
                 </div>
 
                 <div class="form-group">
@@ -88,7 +88,7 @@
 
                 <div class="form-group">
                     <label>Date Applied <span class="required-star">*</span></label>
-                    <input type="date" name="dateApplied" required>
+                    <input type="date" name="dateApplied">
                 </div>
 
                 <div class="form-group full-width">
@@ -106,49 +106,57 @@
                 </div>
             </form>
         </div>
-        <c:choose>
-            <c:when test="${not empty jobs}">
-                <c:forEach var="job" items="${jobs}">
-                    <div class="card-parent" data-id="${job.id}">
-                        <div class="card-head-parent">
-                            <div class="card-head-content">
-                                <h2 class="card-h2">${job.jobTitle}</h2>
-                                <p class="company-name">${job.companyName}</p>
+        <div class="card-page-d">
+            <c:choose>
+                <c:when test="${not empty jobs}">
+                    <c:forEach var="job" items="${jobs}">
+                        <div class="card-parent" data-id="${job.id}">
+                            <div class="card-head-parent">
+                                <div class="card-head-content">
+                                    <h2 class="card-h2">${job.jobTitle}</h2>
+                                    <p class="company-name">${job.companyName}</p>
+                                </div>
+                                <span class="card-pill-status status-${fn:toLowerCase(job.status)}">
+                                        ${job.status}
+                                </span>
                             </div>
-                            <span class="card-pill-status status-${fn:toLowerCase(job.status)}">
-                                    ${job.status}
-                            </span>
-                        </div>
 
-                        <div class="card-meta-info">
-                            <div class="meta-item">
-                                <img src="${pageContext.request.contextPath}/images/location.png" alt="location" class="meta-icon">
-                                <span>${job.location}</span>
+                            <div class="card-meta-info">
+                                <div class="meta-item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#787774" class="meta-icon">
+                                        <path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-560q0-117-73.5-188.5T480-820q-93 0-166.5 71.5T240-560q0 75 59 166.5T480-186Zm0 106Q319-217 239.5-334.5T160-560q0-150 96.5-245T480-900q127 0 223.5 95T800-560q0 112-79.5 229.5T480-80Zm0-480Z"/>
+                                    </svg>
+                                    <span>${job.location}</span>
+                                </div>
+                                <div class="meta-item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#787774" class="meta-icon">
+                                        <path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/>
+                                    </svg>
+                                    <span>${job.salaryRange}</span>
+                                </div>
+                                <div class="meta-item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#787774" class="meta-icon">
+                                        <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-300q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-300q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-300q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/>
+                                    </svg>
+                                    <span>${job.dateApplied}</span>
+                                </div>
                             </div>
-                            <div class="meta-item">
-                                <img src="${pageContext.request.contextPath}/images/dollar-sign.png" alt="salary" class="meta-icon">
-                                <span>${job.salaryRange}</span>
-                            </div>
-                            <div class="meta-item">
-                                <img src="${pageContext.request.contextPath}/images/calendar.png" alt="date" class="meta-icon">
-                                <span>${job.dateApplied}</span>
-                            </div>
-                        </div>
 
-                        <div class="card-content-parent">
-                            <div class="card-description">
-                                    ${fn:substring(job.description, 0, 100)}${fn:length(job.description) > 100 ? '...' : ''}
+                            <div class="card-content-parent">
+                                <div class="card-description">
+                                        ${fn:substring(job.description, 0, 100)}${fn:length(job.description) > 100 ? '...' : ''}
+                                </div>
                             </div>
                         </div>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <div class="empty-state">
+                        <p>No Applications Yet – Click above to get started!!</p>
                     </div>
-                </c:forEach>
-            </c:when>
-            <c:otherwise>
-                <div class="empty-state">
-                    <p>No Applications Yet – Click above to get started!!</p>
-                </div>
-            </c:otherwise>
-        </c:choose>
+                </c:otherwise>
+            </c:choose>
+        </div>
     </div>
 </main>
 

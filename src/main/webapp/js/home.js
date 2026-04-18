@@ -6,6 +6,18 @@
  */
 const initialization = () => {
     handleAddButton();
+    keepFormOpenOnError();
+}
+
+/**
+ * Keeps the form open if an error message is present on the page.
+ * @returns {void}
+ */
+const keepFormOpenOnError = () => {
+    const error = document.querySelector('.errorMsg');
+    if (error) {
+        document.querySelector('.container').classList.add('form-open');
+    }
 }
 
 /**

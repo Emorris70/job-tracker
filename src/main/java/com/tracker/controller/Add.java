@@ -63,11 +63,11 @@ public class Add  extends HttpServlet{
                     || isInvalid(salary)
                     || isInvalid(dateStr))
             {
-                throw new IllegalArgumentException("Please fill in all required fields.");
+                throw new IllegalArgumentException("Please fill out all required fields. (*) indicates a required field.");
             }
 
             if (!isValidSalary(salary)) {
-                throw new IllegalArgumentException("Salary range must contain a numeric value (e.g. $70k - $90k).");
+                throw new IllegalArgumentException("Salary range must contain a numeric value");
             }
 
             LocalDate dateApplied = LocalDate.parse(dateStr);

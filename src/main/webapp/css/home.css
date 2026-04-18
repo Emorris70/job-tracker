@@ -328,6 +328,12 @@ main {
     margin-bottom: 6px;
     letter-spacing: 0.5px;
 }
+.card-page-d {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
 /* When a 'required' field is empty and the user tries to submit */
 /*input:invalid:focus,*/
 /*select:invalid:focus,*/
