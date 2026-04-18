@@ -66,6 +66,10 @@ public class Add  extends HttpServlet{
                 throw new IllegalArgumentException("Please fill in all required fields.");
             }
 
+            if (!isValidSalary(salary)) {
+                throw new IllegalArgumentException("Salary range must contain a numeric value (e.g. $70k - $90k).");
+            }
+
             LocalDate dateApplied = LocalDate.parse(dateStr);
             Job newjob = new Job(user, company, title, location, salary, status, url, description, dateApplied);
             int insertedId = jobDao.insert(newjob);
@@ -73,23 +77,21 @@ public class Add  extends HttpServlet{
             log.info("Job added with ID: {}", insertedId);
             resp.sendRedirect(req.getContextPath() + "/home");
 
-            return;
-
         } catch (IllegalArgumentException e) {
             log.warn("Validation failed: {}", e.getMessage());
-            req.setAttribute("error", e.getMessage());
+            session.setAttribute("error", e.getMessage());
+            resp.sendRedirect(req.getContextPath() + "/home");
 
         } catch (DateTimeParseException e) {
             log.error("Date parsing failed for: {}", dateStr, e);
-            req.setAttribute("error", "Invalid date format.");
+            session.setAttribute("error", "Invalid date format.");
+            resp.sendRedirect(req.getContextPath() + "/home");
 
         } catch (Exception e) {
             log.error("Error adding job: {}", e.getMessage(), e);
-            req.setAttribute("error", "An error occurred while adding the job.");
+            session.setAttribute("error", "An error occurred while adding the job.");
+            resp.sendRedirect(req.getContextPath() + "/home");
         }
-
-        // redirect to home page
-        req.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(req, resp);
     }
 
     /**
@@ -99,5 +101,14 @@ public class Add  extends HttpServlet{
      */
     private boolean isInvalid(String value) {
         return value == null || value.trim().isEmpty();
+    }
+
+    /**
+     * Checks if the salary range contains at least one digit.
+     * @param salary the salary range to check.
+     * @return true if valid, false otherwise.
+     */
+    private boolean isValidSalary(String salary) {
+        return salary.matches(".*\\d.*");
     }
 }

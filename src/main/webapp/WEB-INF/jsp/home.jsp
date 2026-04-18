@@ -49,9 +49,9 @@
             </div>
         </div>
         <div class="form-card" id="add-app-form">
-            <c:if test="${not empty sessionScope.error}">
+            <c:if test="${not empty error}">
                 <div class="errorMsg">
-                    <p class="error-msg">${sessionScope.error}</p>
+                    <p class="error-msg">${error}</p>
                 </div>
                 <c:remove var="error" scope="session"/>
             </c:if>
