@@ -8,6 +8,12 @@
         <h1 class="m-h">Forgot Password?</h1>
         <p class="p-deco reset-p-1">Enter your email to begin</p>
     </div>
+    <c:if test="${not empty sessionScope.error}">
+        <div class="errorMsg">
+            <p class="error-msg">${sessionScope.error}</p>
+        </div>
+        <c:remove var="error" scope="session"/>
+    </c:if>
     <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-form" class="reset-form">
         <div class="con-wrapper">
             <label for="email">email</label>

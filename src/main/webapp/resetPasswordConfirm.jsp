@@ -6,12 +6,12 @@
 <main class="container override-animation">
     <h1 class="m-h">Reset your Password</h1>
     <p class="p-deco s-p s-p-2">Enter the code sent to your email and choose a new password.</p>
-    <div class="errorMsg">
-        <c:if test="${not empty sessionScope.error}">
+    <c:if test="${not empty sessionScope.error}">
+        <div class="errorMsg">
             <p class="error-msg">${sessionScope.error}</p>
-            <c:remove var="error" scope="session"/>
-        </c:if>
-    </div>
+        </div>
+        <c:remove var="error" scope="session"/>
+    </c:if>
     <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-exists">
         <div class="con-wrapper">
             <label for="v-code">Verification code</label>
