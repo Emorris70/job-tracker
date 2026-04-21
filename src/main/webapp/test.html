@@ -5,30 +5,30 @@
     <title>Title</title>
     <script src="js/home.js"></script>
     <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/auth.css" />
-<!--    <link rel="stylesheet" href="css/home.css" />-->
+<!--    <link rel="stylesheet" href="css/auth.css" />-->
+    <link rel="stylesheet" href="css/home.css" />
 </head>
 <body>
 <header>
-<!--    <h1 class="main-header">Job Tracker</h1>-->
-<!--    <div class="user-content">-->
-<!--        <div class="user-info">-->
-<!--&lt;!&ndash;            <img src="${pageContext.request.contextPath}/images/home-user.png" alt="user icon">&ndash;&gt;-->
-<!--            <img src="images/home-user.png" alt="user icon" class="img-d">-->
-<!--            <p class="user-email-d">${}</p>-->
-<!--        </div>-->
-<!--        <div class="user-logout">-->
-<!--            <svg xmlns="http://www.w3.org/2000/svg"-->
-<!--                 class="img-d svg-color-c"-->
-<!--                 viewBox="0 -960 960 960"-->
-<!--                 fill="#e3e3e3">-->
-<!--                <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>-->
-<!--            <a href="${pageContext.request.contextPath}/logout">Logout</a>-->
-<!--        </div>-->
-<!--    </div>-->
+    <h1 class="main-header">Job Tracker</h1>
+    <div class="user-content">
+        <div class="user-info">
+<!--            <img src="${pageContext.request.contextPath}/images/home-user.png" alt="user icon">-->
+            <img src="images/home-user.png" alt="user icon" class="img-d">
+            <p class="user-email-d">${}</p>
+        </div>
+        <div class="user-logout">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="img-d svg-color-c"
+                 viewBox="0 -960 960 960"
+                 fill="#e3e3e3">
+                <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>
+            <a href="${pageContext.request.contextPath}/logout">Logout</a>
+        </div>
+    </div>
 </header>
-<main class="container">
-<!--    <div class="container">-->
+<main>
+    <div class="container">
 
 <!--        <div class="m-c-head">-->
 <!--            <div class="c-head">-->
@@ -142,34 +142,59 @@
 <!--        <div class="empty-state">-->
 <!--            <p>No Applications Yet – Click above to get started!</p>-->
 <!--        </div>-->
-<!--    </div>-->
-    <div class="c-col">
-        <h1 class="m-h">Forgot Password?</h1>
-        <p class="p-deco reset-p-1">Enter your email to begin</p>
-    </div>
-    <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-form" class="reset-form">
-        <div class="con-wrapper">
-            <label for="email">email</label>
-            <div class="input-wrapper">
-                <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        placeholder="name@host.com"
-                        required
-                />
-                <img src="images/mail.png" alt="mail icon"/>
+
+        <div class="detail-head">
+            <a href="${pageContext.request.contextPath}/home" class="back-link">← Back to Applications</a>
+        </div>
+
+        <div class="detail-card">
+
+            <div class="detail-header">
+                <h1 class="detail-h1">Senior Frontend Developer</h1>
+                <p class="detail-company">TechCorp</p>
+                <span class="card-pill-status status-${fn:toLowerCase(job.status)}">
+                    Interviewing
+                </span>
+                <div class="detail-btns">
+                    <button class="edit btn-deco" title="edit"><svg xmlns="http://www.w3.org/2000/svg" class="d-svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+                        <path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg>
+                    </button>
+                    <form action="${pageContext.request.contextPath}/delete" method="POST" style="display:inline;">
+                        <input type="hidden" name="id" value="${job.id}">
+                        <button type="submit" title="delete" class="btn-danger btn-deco" onclick="return confirm('Delete this application?')"><svg xmlns="http://www.w3.org/2000/svg" class="d-svg danger" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+                            <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <label>Location</label>
+                    <p>San Francisco, CA</p>
+                </div>
+                <div class="detail-item">
+                    <label>Salary Range</label>
+                    <p>$140k - $180k}</p>
+                </div>
+                <div class="detail-item">
+                    <label>Date Applied</label>
+                    <p>Applied on March 19, 2026</p>
+                </div>
+            </div>
+
+                <div class="detail-block">
+                    <h3 class="detail-h3">Link</h3>
+                    <a href="${job.jobUrl}" target="_blank" class="job-link">https://techcorp.com/careers/senior-frontend</a>
+                </div>
+
+            <div class="detail-block">
+                <h3 class="detail-h3">Job Description</h3>
+                <div class="description-text">
+                    Building next-generation web applications using React, TypeScript, and modern tooling. Working with a distributed team to create scalable solutions
+                </div>
             </div>
         </div>
-        <div class="btn-container">
-            <button type="submit" name="action" value="forgotPassword" class="btn-submit">
-                Reset
-            </button>
-        </div>
-        <p class="dir-deco center-i">
-            Back to<a href="auth?action=login">Login</a>
-        </p>
-    </form>
+    </div>
 </main>
 </body>
 </html>

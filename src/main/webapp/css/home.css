@@ -54,7 +54,7 @@ main {
 .user-logout:active, .btn-container:active {
     transform: scale(0.95);
 }
-.user-logout:hover, .btn-container:hover, .card-parent:hover {
+.user-logout:hover, .btn-container:hover, .card-parent:hover, .btn-deco:hover {
     background: var(--bg-secondary);
 }
 .main-header {
@@ -334,15 +334,66 @@ main {
     gap: 12px;
     width: 100%;
 }
-/* When a 'required' field is empty and the user tries to submit */
-/*input:invalid:focus,*/
-/*select:invalid:focus,*/
-/*textarea:invalid:focus {*/
-/*    border: 1px solid #EB5757 !important; !* Notion Error Red *!*/
-/*    background-color: #FFF5F5 !important;*/
-/*    outline: none !important;*/
-/*    box-shadow: 0 0 0 2px rgba(235, 87, 87, 0.1) !important;*/
-/*}*/
+/* Layout for the Edit/Delete buttons in the header */
+.detail-header {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.detail-btns {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: 12px;
+}
+.btn-deco {
+    background-color: #FFFFFF;
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    padding: 0.313rem 0.325rem;
+    cursor: pointer;
+}
+.d-svg {
+    fill: var(--text-main);
+    width: var(--xxsmall-icon-size);
+    height: var(--xxsmall-icon-size);
+}
+.danger {
+    fill: #f60000;
+}
+.btn-danger:hover {
+    background-color: rgba(246, 0, 0, 0.2);
+}
+
+.btn-danger:active {
+    transform: scale(0.95);
+}
+.btn-danger:active .d-svg {}
+/* The horizontal grid for Meta info */
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid var(--border-light); /* Grayscale border from Figma */
+    border-bottom: 1px solid var(--border-light);
+    margin-bottom: 32px;
+}
+
+.detail-item label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--mute-contrast); /* Medium gray secondary text */
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+}
+
+.detail-item p {
+    font-weight: 500;
+    color: var(--secondary-text); /* Dark gray primary text */
+}
 /* --- Desktop Layout (Row-Based) --- */
 @media (min-width: 600px) {
     .app-grid-form {

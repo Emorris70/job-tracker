@@ -11,8 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9573e47b-8e41-4860-b0ac-c41935902eaa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resetPassword.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resetPassword.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resetPasswordConfirm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resetPasswordConfirm.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/home.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/test.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,9 +32,9 @@
       <list>
         <option value="HTML File" />
         <option value="CSS File" />
-        <option value="Jsp File" />
         <option value="JavaScript File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -123,6 +123,19 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\User\emorr2.0\job-tracker\src\main\webapp\WEB-INF\jsp\includes" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationStatuses">
+      <map>
+        <entry key="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
+          <value>
+            <map>
+              <entry key="Tomcat 10.1" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 10.1">
     <configuration name="ConnectionTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -279,7 +292,7 @@
       <workItem from="1776435960976" duration="22611000" />
       <workItem from="1776522408817" duration="2808000" />
       <workItem from="1776790115229" duration="1348000" />
-      <workItem from="1776802377564" duration="286000" />
+      <workItem from="1776802377564" duration="6389000" />
     </task>
     <servers />
   </component>
