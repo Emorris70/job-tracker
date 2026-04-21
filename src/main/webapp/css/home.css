@@ -34,7 +34,7 @@ main {
 .user-email-d {
     color: var(--mute-contrast);
 }
-.img-d {
+.img-d, .meta-icon {
     width: var(--xxsmall-icon-size);
     height: var(--xxsmall-icon-size);
 }
@@ -67,7 +67,7 @@ main {
     font-weight: 500;
 }
 .s-p {
-   color: var(--secondary-text);
+    color: var(--secondary-text);
 }
 
 .container {
@@ -126,20 +126,27 @@ main {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
-/* --- The Card Container --- */
-.form-card {
+
+/* --- Shared Card Base Styles --- */
+.form-card, .detail-card {
     width: 100%;
-    background: var(--bg-main);
-    border: 1px solid #E0E0E0;
     border-radius: 8px;
     padding: 2rem;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
+.form-card {
+    background: var(--bg-main);
+    border: 1px solid #E0E0E0;
+}
+.detail-card {
+    background-color: #FFFFFF;
+    border: 1px solid var(--border-light);
+}
 
-/* --- Base Form Grid (Strictly Mobile-First Column) --- */
+/* --- Base Form Grid (Mobile-First) --- */
 .app-grid-form {
     display: grid;
-    grid-template-columns: 1fr; /* Forces every element into one column */
+    grid-template-columns: 1fr;
     gap: 1.25rem;
 }
 
@@ -149,18 +156,19 @@ main {
     gap: 6px;
 }
 
-/* On mobile, even full-width elements and the footer stay in column 1 */
 .full-width,
 .form-footer {
     grid-column: 1;
 }
 
 .form-group label {
-    font-size: 0.8rem;
+    display: block;
+    font-size: 0.75rem;
     font-weight: 600;
     color: var(--mute-contrast);
     text-transform: uppercase;
-    letter-spacing: 0.02rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
 }
 
 .form-group input,
@@ -214,6 +222,7 @@ main {
 .btn-primary:active {
     transform: scale(0.98);
 }
+
 .card-parent {
     display: flex;
     border: 1px solid var(--border-light);
@@ -240,10 +249,6 @@ main {
 .company-name {
     font-weight: 500;
     color: var(--secondary-text);
-}
-.meta-icon {
-    width: var(--xxsmall-icon-size);
-    height: var(--xxsmall-icon-size);
 }
 .card-pill-status {
     display: inline-flex;
@@ -274,30 +279,30 @@ main {
     display: flex;
     flex-direction: column;
 }
-.card-description {
-    color: var(--secondary-text);
+.card-description, .description-text {
     line-height: 1.4;
     display: flex;
     flex-wrap: wrap;
 }
-/* Color variations based on status */
+.card-description {
+    color: var(--secondary-text);
+}
+
+/* Status pill color variations */
 .status-applied {
-    background-color: #D3E5EF; /* Light Blue */
+    background-color: #D3E5EF;
     color: #18445E;
 }
-
 .status-interviewing {
-    background-color: #FDECC8; /* Light Yellow */
+    background-color: #FDECC8;
     color: #403211;
 }
-
 .status-offer {
-    background-color: #DBEDDB; /* Light Green */
+    background-color: #DBEDDB;
     color: #1C3829;
 }
-
 .status-rejected {
-    background-color: #E9E9E6; /* Light Gray */
+    background-color: #E9E9E6;
     color: #5F5E5B;
 }
 
@@ -318,34 +323,20 @@ main {
     margin-left: 2px;
     font-weight: bold;
 }
-
-.form-group label {
-    display: block;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #787774;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-    letter-spacing: 0.5px;
-}
 .card-page-d {
     display: flex;
     flex-direction: column;
     gap: 12px;
     width: 100%;
 }
+
 /* Layout for the Edit/Delete buttons in the header */
-.detail-card {
-    background-color: #FFFFFF;
-    border: 1px solid var(--border-light);
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    width: 100%;
-}
 .detail-header {
     position: relative;
     margin-bottom: 2rem;
+}
+.detail-h1 {
+    font-weight: 600;
 }
 .detail-btns {
     position: absolute;
@@ -361,6 +352,9 @@ main {
     padding: 0.313rem 0.325rem;
     cursor: pointer;
 }
+.detail-pill-status {
+    margin-top: 12px;
+}
 .d-svg {
     fill: var(--text-main);
     width: var(--xxsmall-icon-size);
@@ -370,52 +364,67 @@ main {
     fill: #f60000;
 }
 .btn-danger:hover {
-    background-color: rgba(246, 0, 0, 0.1)!important;
+    background-color: rgba(246, 0, 0, 0.1) !important;
 }
-
 .btn-danger:active {
     transform: scale(0.95);
 }
-.btn-danger:active .d-svg {}
-/* The horizontal grid for Meta info */
+
+/* The horizontal grid for Meta info — 1 column by default, 3 columns on large screens */
 .detail-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: 1fr;
+    gap: 16px;
     padding: 24px 0;
-    border-top: 1px solid var(--border-light); /* Grayscale border from Figma */
+    border-top: 1px solid var(--border-light);
     border-bottom: 1px solid var(--border-light);
-    margin-bottom: 32px;
 }
-
-.detail-item label {
+.detail-block {
+    padding: 24px 0;
+}
+.detail-grid-b {
+    border-top: 1px solid var(--border-light);
+    padding: 24px 0;
+}
+.detail-item label, .sub-head {
     display: block;
     font-size: 0.75rem;
-    color: var(--mute-contrast); /* Medium gray secondary text */
+    font-weight: 500;
+    color: var(--secondary-text);
     text-transform: uppercase;
-    margin-bottom: 8px;
     letter-spacing: 0.05em;
+    margin-bottom: 8px;
+}
+.detail-item p, .description-text {
+    font-weight: 500;
+    color: var(--text-main);
+}
+.description-text, .job-link {
+    font-weight: 400 !important;
+}
+.back-link {
+    color: var(--mute-contrast);
+    transition: color 0.2s ease;
+}
+.back-link:hover {
+    color: var(--text-main);
 }
 
-.detail-item p {
-    font-weight: 500;
-    color: var(--secondary-text); /* Dark gray primary text */
-}
 /* --- Desktop Layout (Row-Based) --- */
 @media (min-width: 600px) {
     .app-grid-form {
-        grid-template-columns: 1fr 1fr; /* Enables the two-column row */
+        grid-template-columns: 1fr 1fr;
     }
 
     .full-width,
     .form-footer {
-        grid-column: span 2; /* Spans across the rows */
+        grid-column: span 2;
     }
 }
 
 /* --- Mobile Specific Tweaks (Under 480px) --- */
 @media (max-width: 480px) {
-    .form-card {
+    .form-card, .detail-card {
         padding: 1.25rem;
     }
 
@@ -426,10 +435,32 @@ main {
     main {
         padding: 20px 10px;
     }
+
+    .detail-h1 {
+        font-size: 1.3rem;
+        padding-right: 4.5rem;
+    }
 }
 
+/* --- Small/Medium screens: prevent button overlap in detail header --- */
+@media (max-width: 767px) {
+    .detail-header {
+        padding-right: 4.5rem;
+    }
+
+    .detail-h1 {
+        font-size: 1.4rem;
+    }
+}
+
+/* --- Large screens (768px+): 3-column detail grid, extra main padding --- */
 @media (min-width: 768px) {
     main {
         padding: 40px 20px;
+    }
+
+    .detail-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
     }
 }
