@@ -15,16 +15,31 @@ public interface PropertiesLoader {
     Logger log = LogManager.getLogger(PropertiesLoader.class);
 
     /**
-     * This default method will load a properties file into a Properties instance
-     * and return it.
+     * Loads properties from environment variables when deployed (Railway),
+     * falling back to a classpath file for local development.
      *
-     * @param propertiesFilePath a path to a file on the java classpath list
-     * @return a populated Properties instance or an empty Properties instance if
-     * the file path was not found.
+     * @param propertiesFilePath classpath path used only in local dev fallback
+     * @return populated Properties instance
      */
-    default Properties loadProperties(String propertiesFilePath) throws IOException, Exception{
+    default Properties loadProperties(String propertiesFilePath) {
         Properties properties = new Properties();
-        properties.load(this.getClass().getResourceAsStream(propertiesFilePath));
+
+        if (System.getenv("MYSQL_URL") != null) {
+            properties.setProperty("aws.cognito.userPoolId",  System.getenv("AWS_COGNITO_USER_POOL_ID"));
+            properties.setProperty("aws.cognito.clientId",    System.getenv("AWS_COGNITO_CLIENT_ID"));
+            properties.setProperty("aws.cognito.clientSecret",System.getenv("AWS_COGNITO_CLIENT_SECRET"));
+            properties.setProperty("aws.cognito.region",      System.getenv("AWS_COGNITO_REGION"));
+        } else {
+            try (InputStream is = this.getClass().getResourceAsStream(propertiesFilePath)) {
+                if (is != null) {
+                    properties.load(is);
+                } else {
+                    log.error("Properties file not found on classpath: {}", propertiesFilePath);
+                }
+            } catch (IOException e) {
+                log.error("Could not load properties file: {}", propertiesFilePath, e);
+            }
+        }
 
         return properties;
     }
