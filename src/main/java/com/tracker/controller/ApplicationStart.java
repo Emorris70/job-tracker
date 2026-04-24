@@ -35,11 +35,9 @@ public class ApplicationStart extends HttpServlet implements PropertiesLoader {
     @Override
     public void init() throws ServletException {
         try {
-            this.properties = loadProperties("/config.properties");
             Properties cognitoProperties = loadProperties("/cognito.properties");
 
             ServletContext context = getServletContext();
-            context.setAttribute("properties", properties);
 
             CognitoClientUtil clientUtil = new CognitoClientUtil(cognitoProperties);
 
@@ -49,10 +47,8 @@ public class ApplicationStart extends HttpServlet implements PropertiesLoader {
             TokenVerifier tokenVerifier = new TokenVerifier(cognitoProperties);
             context.setAttribute("tokenVerifier", tokenVerifier);
 
-        } catch (IOException e) {
-            log.error("Issue reading properties file:" + e.getMessage(), e);
         } catch (Exception e) {
-            log.error("Problem locating properties file:" + e.getMessage(), e);
+            log.error("Failed to initialize auth services: {}", e.getMessage(), e);
         }
     }
 }
