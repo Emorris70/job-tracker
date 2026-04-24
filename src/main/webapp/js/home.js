@@ -1,5 +1,8 @@
 "use strict";
-
+/**
+ * Handles the initialization of the page
+ * @returns {void}
+ */
 const initialization = () => {
     handleSidebar();
     handleAddButton();

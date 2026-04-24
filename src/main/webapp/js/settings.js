@@ -1,4 +1,8 @@
 "use strict";
+/**
+ * Handles the delete confirmation
+ * @returns {void}
+ */
 (function () {
     var toggle  = document.getElementById("deleteToggle");
     var confirm = document.getElementById("deleteConfirm");
