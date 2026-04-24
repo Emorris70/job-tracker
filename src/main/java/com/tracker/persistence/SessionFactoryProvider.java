@@ -10,8 +10,6 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
-
 /**
  * This file provides a SessionFactory for use with DAOs using Hibernate
  *
