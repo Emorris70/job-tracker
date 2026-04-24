@@ -206,6 +206,7 @@ public class Auth extends HttpServlet {
                 resp.sendRedirect("index.jsp");
 
             } catch (Exception e) {
+                log.error("Error logging in user: {}", e.getMessage(), e);
                 session.setAttribute("error", "Something went wrong please try again");
                 resp.sendRedirect("index.jsp");
 
