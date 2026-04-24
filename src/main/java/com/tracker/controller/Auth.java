@@ -163,6 +163,7 @@ public class Auth extends HttpServlet {
                 resp.sendRedirect("confirm.jsp");
 
             } catch (Exception e) {
+                log.error("Error confirming user: {}", e.getMessage(), e);
                 session.setAttribute("error", "Something went wrong please try again");
                 resp.sendRedirect("confirm.jsp");
 

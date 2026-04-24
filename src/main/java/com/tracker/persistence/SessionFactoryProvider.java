@@ -30,7 +30,6 @@ public class SessionFactoryProvider {
         MetadataSources sources;
 
         if (System.getenv("AWS_COGNITO_REGION") != null) {
-            log.info("Railway Environment Detected. Connecting to: " + System.getenv("MYSQL_URL"));
             registry = new StandardServiceRegistryBuilder()
                     .applySetting("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver")
                     .applySetting("hibernate.connection.url", "jdbc:" + System.getenv("MYSQL_URL"))
