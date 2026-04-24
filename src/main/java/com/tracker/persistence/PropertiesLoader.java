@@ -29,6 +29,8 @@ public interface PropertiesLoader {
             properties.setProperty("aws.cognito.clientId",    System.getenv("AWS_COGNITO_CLIENT_ID"));
             properties.setProperty("aws.cognito.clientSecret",System.getenv("AWS_COGNITO_CLIENT_SECRET"));
             properties.setProperty("aws.cognito.region",      System.getenv("AWS_COGNITO_REGION"));
+
+            return properties;
         } else {
             try (InputStream is = this.getClass().getResourceAsStream(propertiesFilePath)) {
                 if (is != null) {
