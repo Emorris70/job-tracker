@@ -32,7 +32,7 @@ public class SessionFactoryProvider {
         if (System.getenv("AWS_COGNITO_REGION") != null) {
             log.info("Railway Environment Detected. Connecting to: " + System.getenv("MYSQL_URL"));
             registry = new StandardServiceRegistryBuilder()
-                    // 1. Let Hibernate auto-detect the driver from the URL
+                    .applySetting("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver")
                     .applySetting("hibernate.connection.url", System.getenv("MYSQL_URL"))
                     .applySetting("hibernate.connection.username", System.getenv("MYSQLUSER"))
                     .applySetting("hibernate.connection.password", System.getenv("MYSQLPASSWORD"))
