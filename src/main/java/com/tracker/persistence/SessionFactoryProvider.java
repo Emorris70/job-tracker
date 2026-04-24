@@ -32,18 +32,21 @@ public class SessionFactoryProvider {
         if (System.getenv("AWS_COGNITO_REGION") != null) {
             log.info("Railway Environment Detected. Connecting to: " + System.getenv("MYSQL_URL"));
             registry = new StandardServiceRegistryBuilder()
-                    .applySetting("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver")
-                    .applySetting("hibernate.connection.url",          System.getenv("MYSQL_URL"))
-                    .applySetting("hibernate.connection.username",     System.getenv("MYSQLUSER"))
-                    .applySetting("hibernate.connection.password",     System.getenv("MYSQLPASSWORD"))
-                    .applySetting("hibernate.dialect",                 "org.hibernate.dialect.MySQL8Dialect")
-                    .applySetting("hibernate.hbm2ddl.auto",            "update")
-                    .applySetting("show_sql",                          "false")
-                    .applySetting("hibernate.c3p0.min_size",           "5")
-                    .applySetting("hibernate.c3p0.max_size",           "20")
-                    .applySetting("hibernate.c3p0.timeout",            "300")
-                    .applySetting("hibernate.c3p0.max_statements",     "50")
-                    .applySetting("hibernate.c3p0.idle_test_period",   "3000")
+                    // 1. Let Hibernate auto-detect the driver from the URL
+                    .applySetting("hibernate.connection.url", System.getenv("MYSQL_URL"))
+                    .applySetting("hibernate.connection.username", System.getenv("MYSQLUSER"))
+                    .applySetting("hibernate.connection.password", System.getenv("MYSQLPASSWORD"))
+
+                    // 2. Use the updated Dialect name as suggested by the logs
+                    .applySetting("hibernate.dialect","org.hibernate.dialect.MySQLDialect")
+
+                    // 3. Keep these for Railway's schema management
+                    .applySetting("hibernate.hbm2ddl.auto","update")
+                    .applySetting("show_sql","false")
+
+                    // 4. Temporarily simplify C3P0 to rule out pool timeouts
+                    .applySetting("hibernate.c3p0.min_size", "1")
+                    .applySetting("hibernate.c3p0.max_size",  "5")
                     .build();
             sources = new MetadataSources(registry);
             sources.addAnnotatedClass(User.class);
