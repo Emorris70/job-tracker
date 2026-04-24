@@ -10,23 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9573e47b-8e41-4860-b0ac-c41935902eaa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Add.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Auth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Auth.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/AuthFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/persistence/CognitoAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/persistence/CognitoAuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j2.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j2.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/includes/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/includes/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/result.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/result.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/auth.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/auth.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resetPasswordConfirm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resetPasswordConfirm.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/signup.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +33,7 @@
         <option value="JavaScript File" />
         <option value="Class" />
         <option value="Jsp File" />
+        <option value="Dockerfile" />
       </list>
     </option>
   </component>
@@ -309,6 +295,7 @@
       <workItem from="1776868650249" duration="964000" />
       <workItem from="1776870121133" duration="77000" />
       <workItem from="1776892740782" duration="2507000" />
+      <workItem from="1777046073405" duration="1024000" />
     </task>
     <servers />
   </component>
