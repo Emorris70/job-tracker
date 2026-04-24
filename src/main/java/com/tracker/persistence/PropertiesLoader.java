@@ -24,13 +24,15 @@ public interface PropertiesLoader {
     default Properties loadProperties(String propertiesFilePath) {
         Properties properties = new Properties();
 
-        if (System.getenv("MYSQL_URL") != null) {
+        if (System.getenv("AWS_COGNITO_REGION") != null) {
+            log.info("Detected Railway environment via AWS_COGNITO_REGION");
             properties.setProperty("aws.cognito.userPoolId",  System.getenv("AWS_COGNITO_USER_POOL_ID"));
             properties.setProperty("aws.cognito.clientId",    System.getenv("AWS_COGNITO_CLIENT_ID"));
             properties.setProperty("aws.cognito.clientSecret",System.getenv("AWS_COGNITO_CLIENT_SECRET"));
             properties.setProperty("aws.cognito.region",      System.getenv("AWS_COGNITO_REGION"));
 
             return properties;
+
         } else {
             try (InputStream is = this.getClass().getResourceAsStream(propertiesFilePath)) {
                 if (is != null) {
