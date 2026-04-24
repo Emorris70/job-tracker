@@ -10,6 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9573e47b-8e41-4860-b0ac-c41935902eaa" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/persistence/SessionFactoryProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/persistence/SessionFactoryProvider.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -294,7 +295,7 @@
       <workItem from="1776868650249" duration="964000" />
       <workItem from="1776870121133" duration="77000" />
       <workItem from="1776892740782" duration="2507000" />
-      <workItem from="1777046073405" duration="8301000" />
+      <workItem from="1777046073405" duration="8997000" />
     </task>
     <servers />
   </component>

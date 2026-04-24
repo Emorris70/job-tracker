@@ -30,13 +30,13 @@ public class SessionFactoryProvider {
         MetadataSources sources;
 
         if (System.getenv("AWS_COGNITO_REGION") != null) {
-            log.info("Railway environment detected. Initializing Hibernate via Env Vars.");
+            log.info("Railway Environment Detected. Connecting to: " + System.getenv("MYSQL_URL"));
             registry = new StandardServiceRegistryBuilder()
                     .applySetting("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver")
                     .applySetting("hibernate.connection.url",          System.getenv("MYSQL_URL"))
                     .applySetting("hibernate.connection.username",     System.getenv("MYSQLUSER"))
                     .applySetting("hibernate.connection.password",     System.getenv("MYSQLPASSWORD"))
-                    .applySetting("hibernate.dialect",                 "org.hibernate.dialect.MySQLDialect")
+                    .applySetting("hibernate.dialect",                 "org.hibernate.dialect.MySQL8Dialect")
                     .applySetting("hibernate.hbm2ddl.auto",            "update")
                     .applySetting("show_sql",                          "false")
                     .applySetting("hibernate.c3p0.min_size",           "5")
