@@ -47,6 +47,9 @@ public class AuthFilter implements Filter {
         resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         resp.setHeader("Pragma", "no-cache");
         resp.setDateHeader("Expires", 0);
+        resp.setHeader("X-Content-Type-Options", "nosniff");
+        resp.setHeader("X-Frame-Options", "DENY");
+        resp.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
 
         String path = req.getRequestURI();
 
@@ -54,6 +57,8 @@ public class AuthFilter implements Filter {
         boolean isPublic = path.contains("/index.jsp") ||
                 path.contains("/signup.jsp") ||
                 path.contains("/confirm.jsp") ||
+                path.contains("/resetPassword.jsp") ||
+                path.contains("/resetPasswordConfirm.jsp") ||
                 path.contains("/logout") ||
                 path.contains("/auth") ||
                 path.contains("/css") ||

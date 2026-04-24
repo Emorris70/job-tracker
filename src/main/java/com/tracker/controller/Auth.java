@@ -71,6 +71,10 @@ public class Auth extends HttpServlet {
 
         }
 
+        if (url.isEmpty()) {
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            return;
+        }
         RequestDispatcher dispatcher = req.getRequestDispatcher(url);
         dispatcher.forward(req, resp);
     }
@@ -92,6 +96,13 @@ public class Auth extends HttpServlet {
 
         CognitoAuthService cognitoAuth = (CognitoAuthService) getServletContext().getAttribute("cognitoAuth");
         TokenVerifier tokenVerifier = (TokenVerifier) getServletContext().getAttribute("tokenVerifier");
+
+        if (cognitoAuth == null || tokenVerifier == null) {
+            log.error("Auth services not initialized — ApplicationStart may have failed");
+            session.setAttribute("error", "Service unavailable. Please try again later.");
+            resp.sendRedirect("index.jsp");
+            return;
+        }
 
         String action = req.getParameter("action");
 
@@ -166,13 +177,19 @@ public class Auth extends HttpServlet {
                 AuthenticatedUser authUser = tokenVerifier.verify(result.idToken());
 
                 GenericDao<User> userDao = new GenericDao<>(User.class);
+                java.util.List<User> users = userDao.findBy("sub", authUser.getSub());
+                if (users.isEmpty()) {
+                    log.error("Authenticated Cognito user has no matching DB record: {}", authUser.getSub());
+                    session.setAttribute("error", "Account setup incomplete. Please contact support.");
+                    resp.sendRedirect("index.jsp");
+                    return;
+                }
 
-                User dbUser = userDao.findBy("sub", authUser.getSub()).get(0);
-
-                // Used to extract claims from the JWT
-                session.setAttribute("user", authUser);
-                // To perform internal operations on the specific user
-                session.setAttribute("dbUser", dbUser);
+                // Session fixation prevention: invalidate old session and create fresh one
+                session.invalidate();
+                HttpSession newSession = req.getSession(true);
+                newSession.setAttribute("user", authUser);
+                newSession.setAttribute("dbUser", users.get(0));
 
                 resp.sendRedirect(req.getContextPath() + "/home");
 
@@ -231,7 +248,7 @@ public class Auth extends HttpServlet {
 
             } catch (CodeMismatchException e) {
                 session.setAttribute("error", "Invalid verification code");
-                resp.sendRedirect("auth?action=reset-pass-confirm");
+                resp.sendRedirect("resetPasswordConfirm.jsp");
 
             } catch (ExpiredCodeException e) {
                 session.setAttribute("error", "Code has expired, please request a new one");
@@ -239,15 +256,15 @@ public class Auth extends HttpServlet {
 
             } catch (InvalidPasswordException e) {
                 session.setAttribute("error", "Password does not meet requirements");
-                resp.sendRedirect("auth?action=reset-pass-confirm");
+                resp.sendRedirect("resetPasswordConfirm.jsp");
 
             } catch (TooManyRequestsException e) {
                 session.setAttribute("error", "Too many attempts, please try again later");
-                resp.sendRedirect("auth?action=reset-pass-confirm");
+                resp.sendRedirect("resetPasswordConfirm.jsp");
 
             } catch (Exception e) {
                 session.setAttribute("error", "Something went wrong please try again");
-                resp.sendRedirect("auth?action=reset-pass-confirm");
+                resp.sendRedirect("resetPasswordConfirm.jsp");
 
             }
         }

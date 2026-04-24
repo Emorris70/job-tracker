@@ -236,3 +236,78 @@ label {
         padding: 0.5rem;
     }
 }
+
+/* ============================================================
+   Password Requirements
+   ============================================================ */
+.pw-req-wrap {
+    margin-top: -0.4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.pw-req-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    font-family: inherit;
+    color: #9B9A97;
+    padding: 0;
+    transition: color 0.15s;
+    align-self: flex-start;
+}
+.pw-req-toggle:hover {
+    color: #37352F;
+}
+.pw-req-chevron {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+.pw-req-toggle[aria-expanded="true"] .pw-req-chevron {
+    transform: rotate(180deg);
+}
+
+.pw-req-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.28s ease, opacity 0.2s ease, margin-top 0.2s ease;
+}
+.pw-req-list.open {
+    max-height: 180px;
+    opacity: 1;
+    margin-top: 8px;
+}
+
+.pw-req-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.78rem;
+    color: #9B9A97;
+    padding: 3px 0;
+    transition: color 0.2s ease;
+}
+.pw-req-icon {
+    width: 13px;
+    height: 13px;
+    fill: currentColor;
+    flex-shrink: 0;
+    transition: fill 0.2s ease;
+}
+.pw-req-item.met {
+    color: #15803d;
+}
+.pw-req-item.unmet {
+    color: #d93025;
+}

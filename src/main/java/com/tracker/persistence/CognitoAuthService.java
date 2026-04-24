@@ -209,4 +209,18 @@ public class CognitoAuthService {
 
         cognitoClient.confirmForgotPassword(request);
     }
+
+    /**
+     * Permanently deletes a user from the Cognito User Pool.
+     *
+     * @param email the user's email address (used as the Cognito username).
+     * @throws Exception if the deletion fails.
+     */
+    public void deleteUser(String email) throws Exception {
+        AdminDeleteUserRequest request = AdminDeleteUserRequest.builder()
+                .userPoolId(userPoolId)
+                .username(email)
+                .build();
+        cognitoClient.adminDeleteUser(request);
+    }
 }

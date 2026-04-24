@@ -54,8 +54,13 @@ public class Home extends HttpServlet {
             return;
         }
 
-        // Load saved user data from the session
         User dbUser = (User) session.getAttribute("dbUser");
+        if (dbUser == null) {
+            log.warn("Session missing dbUser — invalidating and redirecting to login");
+            session.invalidate();
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            return;
+        }
         List<Job> jobs = jobDao.findByUserId(dbUser.getId());
         req.setAttribute("jobs", jobs);
 

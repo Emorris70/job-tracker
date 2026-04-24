@@ -22,7 +22,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 body {
     font-family: inter, sans-serif;
-    background-color: #FBFBFA;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 a {
     text-decoration: none;

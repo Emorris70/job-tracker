@@ -70,6 +70,10 @@ public class Add  extends HttpServlet{
                 throw new IllegalArgumentException("Salary range must contain a numeric value");
             }
 
+            if (!isInvalid(url) && !url.matches("^https?://.*")) {
+                throw new IllegalArgumentException("Job link must start with http:// or https://");
+            }
+
             LocalDate dateApplied = LocalDate.parse(dateStr);
             Job newjob = new Job(user, company, title, location, salary, status, url, description, dateApplied);
             int insertedId = jobDao.insert(newjob);

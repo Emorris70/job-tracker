@@ -1,16 +1,45 @@
 "use strict";
 
-/**
- * Initializes the application
- * @returns {void}
- */
 const initialization = () => {
+    handleSidebar();
     handleAddButton();
     keepFormOpenOnError();
 }
+/**
+ * Handles the sidebar and overlay
+ * @returns {void}
+ */
+const handleSidebar = () => {
+    const sidebar    = document.getElementById('sidebar');
+    const overlay    = document.getElementById('sidebarOverlay');
+    const openBtn    = document.getElementById('hamburgerBtn');
+    const closeBtn   = document.getElementById('sidebarClose');
+
+    const open = () => {
+        sidebar.classList.add('open');
+        overlay.classList.add('active');
+        sidebar.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('sidebar-open');
+    };
+
+    const close = () => {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+        sidebar.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('sidebar-open');
+    };
+
+    openBtn.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', close);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') close();
+    });
+};
 
 /**
- * Keeps the form open if an error message is present on the page.
+ * Keeps the form open if there is an error
  * @returns {void}
  */
 const keepFormOpenOnError = () => {
@@ -21,15 +50,15 @@ const keepFormOpenOnError = () => {
 }
 
 /**
- * Handles the click event on the Add button
+ * Handles the add button
  * @returns {void}
  */
 const handleAddButton = () => {
     const container = document.querySelector('.container');
     const toggleBtn = document.querySelector('.main-btn');
+    if (!toggleBtn || !container) return;
 
     toggleBtn.addEventListener('click', () => {
-
         container.classList.toggle('form-open');
     });
 }
