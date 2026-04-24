@@ -23,13 +23,13 @@ public class SessionFactoryProvider {
     private static final Logger log = LogManager.getLogger(SessionFactoryProvider.class);
 
     /**
-     * Create session factory.
+     * Create a session factory.
      */
     public static void createSessionFactory() {
 
         MetadataSources sources;
 
-        if (System.getenv("MYSQL_URL") != null) {
+        if (System.getenv("AWS_COGNITO_REGION") != null) {
             log.info("Railway environment detected. Initializing Hibernate via Env Vars.");
             registry = new StandardServiceRegistryBuilder()
                     .applySetting("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver")
