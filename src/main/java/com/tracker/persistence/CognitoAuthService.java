@@ -211,6 +211,26 @@ public class CognitoAuthService {
     }
 
     /**
+     * Resends the confirmation code to the user's email.
+     *
+     * @param email the user's email address.
+     *
+     * @throws UserNotFoundException If no account exists with that email.
+     * @throws TooManyRequestsException If too many requests are made.
+     */
+    public void resendConfirmationCode(String email)
+            throws UserNotFoundException, TooManyRequestsException, Exception
+    {
+        ResendConfirmationCodeRequest request = ResendConfirmationCodeRequest.builder()
+                .clientId(clientId)
+                .username(email)
+                .secretHash(computeSecretHash(email))
+                .build();
+
+        cognitoClient.resendConfirmationCode(request);
+    }
+
+    /**
      * Permanently deletes a user from the Cognito User Pool.
      *
      * @param email the user's email address (used as the Cognito username).

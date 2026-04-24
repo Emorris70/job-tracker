@@ -106,19 +106,30 @@ public class Auth extends HttpServlet {
 
         String action = req.getParameter("action");
 
+        if (action == null || action.isBlank()) {
+            resp.sendRedirect("index.jsp");
+            return;
+        }
+
         if ("signUp".equals(action)) {
 
             String firstName = req.getParameter("first_name");
             String email = req.getParameter("email");
             String password = req.getParameter("password");
 
+            if (firstName == null || firstName.isBlank() ||
+                email == null || email.isBlank() ||
+                password == null || password.isBlank()) {
+                session.setAttribute("error", "Please fill out all required fields");
+                resp.sendRedirect("signup.jsp");
+                return;
+            }
+
             try {
-                GenericDao<User> userDao = new GenericDao<>(User.class);
                 String sub = cognitoAuth.register(firstName, email, password);
 
-                userDao.insert(new User(sub));
-
                 session.setAttribute("pendingConfirmEmail", email);
+                session.setAttribute("pendingConfirmSub", sub);
                 session.setAttribute("title", "confirm - Job Tracker");
                 resp.sendRedirect("confirm.jsp");
 
@@ -147,10 +158,28 @@ public class Auth extends HttpServlet {
         } else if ("confirm".equals(action)) {
             String email = (String) session.getAttribute("pendingConfirmEmail");
             String code = req.getParameter("v-code");
+
+            String pendingSub = (String) session.getAttribute("pendingConfirmSub");
+
+            if (email == null || email.isBlank() || pendingSub == null || pendingSub.isBlank()) {
+                session.setAttribute("error", "Session expired. Please sign up again.");
+                resp.sendRedirect("signup.jsp");
+                return;
+            }
+            if (code == null || code.isBlank()) {
+                session.setAttribute("error", "Please enter your verification code");
+                resp.sendRedirect("confirm.jsp");
+                return;
+            }
+
             try {
                 cognitoAuth.confirmSignUp(email, code);
 
+                GenericDao<User> userDao = new GenericDao<>(User.class);
+                userDao.insert(new User(pendingSub));
+
                 session.removeAttribute("pendingConfirmEmail");
+                session.removeAttribute("pendingConfirmSub");
                 resp.sendRedirect("index.jsp");
 
             } catch (CodeMismatchException e) {
@@ -171,6 +200,13 @@ public class Auth extends HttpServlet {
         } else if ("login".equals(action)) {
             String email = req.getParameter("email");
             String password = req.getParameter("password");
+
+            if (email == null || email.isBlank() ||
+                password == null || password.isBlank()) {
+                session.setAttribute("error", "Please enter your email and password");
+                resp.sendRedirect("index.jsp");
+                return;
+            }
 
             try {
 
@@ -212,8 +248,42 @@ public class Auth extends HttpServlet {
                 resp.sendRedirect("index.jsp");
 
             }
+        } else if ("resendCode".equals(action)) {
+            String email = (String) session.getAttribute("pendingConfirmEmail");
+
+            if (email == null || email.isBlank()) {
+                session.setAttribute("error", "Session expired. Please sign up again.");
+                resp.sendRedirect("signup.jsp");
+                return;
+            }
+
+            try {
+                cognitoAuth.resendConfirmationCode(email);
+                session.setAttribute("successMsg", "A new code has been sent to your email");
+                resp.sendRedirect("confirm.jsp");
+
+            } catch (UserNotFoundException e) {
+                session.setAttribute("error", "No account found. Please sign up again.");
+                resp.sendRedirect("signup.jsp");
+
+            } catch (TooManyRequestsException e) {
+                session.setAttribute("error", "Too many attempts, please try again later");
+                resp.sendRedirect("confirm.jsp");
+
+            } catch (Exception e) {
+                log.error("Error resending confirmation code: {}", e.getMessage(), e);
+                session.setAttribute("error", "Something went wrong please try again");
+                resp.sendRedirect("confirm.jsp");
+
+            }
         } else if ("forgotPassword".equals(action)) {
             String email = req.getParameter("email");
+
+            if (email == null || email.isBlank()) {
+                session.setAttribute("error", "Please enter your email address");
+                resp.sendRedirect("resetPassword.jsp");
+                return;
+            }
 
             try {
                 cognitoAuth.forgotPassword(email);
@@ -241,6 +311,17 @@ public class Auth extends HttpServlet {
             String email = (String) session.getAttribute("resetEmail");
             String code = req.getParameter("v-code");
             String newPassword = req.getParameter("password");
+
+            if (email == null || email.isBlank()) {
+                session.setAttribute("error", "Session expired. Please restart the password reset.");
+                resp.sendRedirect("resetPassword.jsp");
+                return;
+            }
+            if (code == null || code.isBlank() || newPassword == null || newPassword.isBlank()) {
+                session.setAttribute("error", "Please fill out all required fields");
+                resp.sendRedirect("resetPasswordConfirm.jsp");
+                return;
+            }
 
             try {
                 cognitoAuth.confirmForgotPassword(email, code, newPassword);

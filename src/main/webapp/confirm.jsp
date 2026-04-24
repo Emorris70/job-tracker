@@ -11,6 +11,10 @@
             <p class="error-msg">${sessionScope.error}</p>
             <c:remove var="error" scope="session"/>
         </c:if>
+        <c:if test="${not empty sessionScope.successMsg}">
+            <p class="success-msg">${sessionScope.successMsg}</p>
+            <c:remove var="successMsg" scope="session"/>
+        </c:if>
     </div>
     <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-exists">
         <div class="con-wrapper">
@@ -26,6 +30,9 @@
                     class="btn-submit">Continue</button>
             <a href="auth?action=sign-up" class="btn-submit back-btn">Back</a>
         </div>
+    </form>
+    <form method="POST" action="${pageContext.request.contextPath}/auth">
+        <button type="submit" name="action" value="resendCode" class="btn-link">Resend code</button>
     </form>
 </main>
 </body>
