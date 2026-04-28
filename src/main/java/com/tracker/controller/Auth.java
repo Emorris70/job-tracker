@@ -69,6 +69,27 @@ public class Auth extends HttpServlet {
             url = "/resetPasswordConfirm.jsp";
             req.setAttribute("page", "Reset Password - Job Tracker");
 
+        } else if ("resendCode".equals(req.getParameter("action"))) {
+            String email = session != null ? (String) session.getAttribute("pendingConfirmEmail") : null;
+
+            if (email == null || email.isBlank()) {
+                if (session != null) session.setAttribute("error", "Session expired. Please sign up again.");
+                resp.sendRedirect("signup.jsp");
+                return;
+            }
+
+            CognitoAuthService cognitoAuth = (CognitoAuthService) getServletContext().getAttribute("cognitoAuth");
+            try {
+                cognitoAuth.resendConfirmationCode(email);
+                session.setAttribute("successMsg", "A new code has been sent to your email");
+            } catch (TooManyRequestsException e) {
+                session.setAttribute("error", "Too many attempts, please try again later");
+            } catch (Exception e) {
+                log.error("Error resending confirmation code: {}", e.getMessage(), e);
+                session.setAttribute("error", "Something went wrong please try again");
+            }
+            resp.sendRedirect("confirm.jsp");
+            return;
         }
 
         if (url.isEmpty()) {
@@ -150,6 +171,7 @@ public class Auth extends HttpServlet {
                 resp.sendRedirect("signup.jsp");
 
             } catch (Exception e) {
+                log.error("Error registering user: {}", e.getMessage(), e);
                 session.setAttribute("error", "Something went wrong please try again");
                 resp.sendRedirect("signup.jsp");
 
@@ -248,34 +270,6 @@ public class Auth extends HttpServlet {
                 resp.sendRedirect("index.jsp");
 
             }
-        } else if ("resendCode".equals(action)) {
-            String email = (String) session.getAttribute("pendingConfirmEmail");
-
-            if (email == null || email.isBlank()) {
-                session.setAttribute("error", "Session expired. Please sign up again.");
-                resp.sendRedirect("signup.jsp");
-                return;
-            }
-
-            try {
-                cognitoAuth.resendConfirmationCode(email);
-                session.setAttribute("successMsg", "A new code has been sent to your email");
-                resp.sendRedirect("confirm.jsp");
-
-            } catch (UserNotFoundException e) {
-                session.setAttribute("error", "No account found. Please sign up again.");
-                resp.sendRedirect("signup.jsp");
-
-            } catch (TooManyRequestsException e) {
-                session.setAttribute("error", "Too many attempts, please try again later");
-                resp.sendRedirect("confirm.jsp");
-
-            } catch (Exception e) {
-                log.error("Error resending confirmation code: {}", e.getMessage(), e);
-                session.setAttribute("error", "Something went wrong please try again");
-                resp.sendRedirect("confirm.jsp");
-
-            }
         } else if ("forgotPassword".equals(action)) {
             String email = req.getParameter("email");
 
@@ -303,6 +297,7 @@ public class Auth extends HttpServlet {
                 resp.sendRedirect("resetPassword.jsp");
 
             } catch (Exception e) {
+                log.error("Error resetting password: {}", e.getMessage(), e);
                 session.setAttribute("error", "Something went wrong please try again");
                 resp.sendRedirect("resetPassword.jsp");
 
@@ -346,6 +341,7 @@ public class Auth extends HttpServlet {
                 resp.sendRedirect("resetPasswordConfirm.jsp");
 
             } catch (Exception e) {
+                log.error("Error confirming forgotten password: {}", e.getMessage(), e);
                 session.setAttribute("error", "Something went wrong please try again");
                 resp.sendRedirect("resetPasswordConfirm.jsp");
 

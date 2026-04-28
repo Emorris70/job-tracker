@@ -12,6 +12,7 @@
     <list default="true" id="9573e47b-8e41-4860-b0ac-c41935902eaa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Auth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Auth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/confirm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/confirm.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,19 +123,6 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\User\emorr2.0\job-tracker\src\main\webapp\WEB-INF\jsp\includes" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="configurationStatuses">
-      <map>
-        <entry key="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
-          <value>
-            <map>
-              <entry key="Tomcat 10.1" value="STOPPED" />
-            </map>
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 10.1">
     <configuration name="ConnectionTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -296,7 +284,9 @@
       <workItem from="1776870121133" duration="77000" />
       <workItem from="1776892740782" duration="2507000" />
       <workItem from="1777046073405" duration="11665000" />
-      <workItem from="1777064317040" duration="1417000" />
+      <workItem from="1777064317040" duration="2352000" />
+      <workItem from="1777307293335" duration="1230000" />
+      <workItem from="1777308700033" duration="22000" />
     </task>
     <servers />
   </component>

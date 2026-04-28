@@ -31,9 +31,7 @@
             <a href="auth?action=sign-up" class="btn-submit back-btn">Back</a>
         </div>
     </form>
-    <form method="POST" action="${pageContext.request.contextPath}/auth">
-        <button type="submit" name="action" value="resendCode" class="btn-link">Resend code</button>
-    </form>
+    <a href="${pageContext.request.contextPath}/auth?action=resendCode">Resend code</a>
 </main>
 </body>
 </html>
