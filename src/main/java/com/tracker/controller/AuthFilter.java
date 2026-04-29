@@ -63,7 +63,10 @@ public class AuthFilter implements Filter {
                 path.contains("/auth") ||
                 path.contains("/css") ||
                 path.contains("/images") ||
-                path.contains("/js");
+                path.contains("/js") ||
+                path.endsWith("/favicon.ico") ||
+                path.endsWith("/apple-touch-icon.png") ||
+                path.endsWith("/apple-touch-icon-precomposed.png");
 
         HttpSession session = req.getSession(false);
 
