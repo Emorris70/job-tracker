@@ -226,8 +226,28 @@ public class Auth extends HttpServlet {
                 session.setAttribute("error", "Invalid verification code");
                 resp.sendRedirect(confirmUrl);
 
-            } catch (ExpiredCodeException e) {
-                session.setAttribute("error", "Code has expired please request a new one");
+            } catch (ExpiredCodeException | NotAuthorizedException e) {
+                // Cognito can internally confirm the user then return an error due to a
+                // race condition (network timeout, transient fault). Also fires when the
+                // user is already confirmed and re-submits the form. Check actual status
+                // before surfacing an error to the user.
+                try {
+                    if (cognitoAuth.isUserConfirmed(email)) {
+                        log.warn("User confirmed in Cognito despite exception — completing DB setup for: {}", email);
+                        GenericDao<User> userDao = new GenericDao<>(User.class);
+                        java.util.List<User> existing = userDao.findBy("sub", pendingSub);
+                        if (existing.isEmpty()) {
+                            userDao.insert(new User(pendingSub));
+                        }
+                        session.removeAttribute("pendingConfirmEmail");
+                        session.removeAttribute("pendingConfirmSub");
+                        resp.sendRedirect("index.jsp");
+                        return;
+                    }
+                } catch (Exception checkEx) {
+                    log.error("Error checking Cognito user status after exception: {}", checkEx.getMessage(), checkEx);
+                }
+                session.setAttribute("error", "Code has expired. Please request a new one.");
                 resp.sendRedirect(confirmUrl);
 
             } catch (Exception e) {

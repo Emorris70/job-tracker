@@ -231,6 +231,24 @@ public class CognitoAuthService {
     }
 
     /**
+     * Checks whether a user is fully confirmed in Cognito.
+     * Used to detect the race condition where confirmSignUp internally succeeds
+     * but returns ExpiredCodeException or NotAuthorizedException to the caller.
+     *
+     * @param email the user's email address (used as the Cognito username).
+     * @return true if the user's status is CONFIRMED, false otherwise.
+     * @throws Exception if the lookup fails.
+     */
+    public boolean isUserConfirmed(String email) throws Exception {
+        AdminGetUserRequest request = AdminGetUserRequest.builder()
+                .userPoolId(userPoolId)
+                .username(email)
+                .build();
+        AdminGetUserResponse response = cognitoClient.adminGetUser(request);
+        return UserStatusType.CONFIRMED.equals(response.userStatus());
+    }
+
+    /**
      * Permanently deletes a user from the Cognito User Pool.
      *
      * @param email the user's email address (used as the Cognito username).
