@@ -9,10 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9573e47b-8e41-4860-b0ac-c41935902eaa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/home.css" afterDir="false" />
-    </list>
+    <list default="true" id="9573e47b-8e41-4860-b0ac-c41935902eaa" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -136,7 +133,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.Tomcat 10.1">
+  <component name="RunManager">
     <configuration name="ConnectionTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tracker_test.persistence.ConnectionTest" />
       <module name="job-tracker" />
@@ -302,7 +299,7 @@
       <workItem from="1777414167806" duration="1123000" />
       <workItem from="1777415762122" duration="12000" />
       <workItem from="1777418181688" duration="3362000" />
-      <workItem from="1777423121033" duration="15431000" />
+      <workItem from="1777423121033" duration="16305000" />
     </task>
     <servers />
   </component>
