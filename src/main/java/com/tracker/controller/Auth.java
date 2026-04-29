@@ -215,8 +215,12 @@ public class Auth extends HttpServlet {
             try {
                 cognitoAuth.confirmSignUp(email, code);
 
+                // Check before insert: a prior attempt may have created the record
+                // if Cognito confirmed the user but returned an exception (race condition).
                 GenericDao<User> userDao = new GenericDao<>(User.class);
-                userDao.insert(new User(pendingSub));
+                if (userDao.findBy("sub", pendingSub).isEmpty()) {
+                    userDao.insert(new User(pendingSub));
+                }
 
                 session.removeAttribute("pendingConfirmEmail");
                 session.removeAttribute("pendingConfirmSub");
@@ -226,30 +230,13 @@ public class Auth extends HttpServlet {
                 session.setAttribute("error", "Invalid verification code");
                 resp.sendRedirect(confirmUrl);
 
-            } catch (NotAuthorizedException e) {
-                // Cognito returns this when the user is already CONFIRMED — no admin API needed.
-                // Happens when confirmSignUp succeeded previously but DB insert failed,
-                // or the user re-submits the form after already confirming.
+            } catch (NotAuthorizedException | ExpiredCodeException e) {
+                // Both exceptions occur when Cognito confirms the user internally but
+                // returns an error to the caller — a known Cognito race condition on Railway.
+                // NotAuthorizedException: "Current status is CONFIRMED"
+                // ExpiredCodeException: Cognito confirmed the user but the code timestamp is stale
+                // In both cases, complete DB setup and redirect to login.
                 completeDbSetup(pendingSub, session, resp, confirmUrl, log);
-
-            } catch (ExpiredCodeException e) {
-                // Cognito sometimes returns ExpiredCodeException instead of NotAuthorizedException
-                // when the user is already confirmed but the code has since expired.
-                // Check our DB first — if the record exists the user is fully set up already.
-                try {
-                    GenericDao<User> userDao = new GenericDao<>(User.class);
-                    if (!userDao.findBy("sub", pendingSub).isEmpty()) {
-                        log.warn("ExpiredCodeException but user already in DB — redirecting to login for sub: {}", pendingSub);
-                        session.removeAttribute("pendingConfirmEmail");
-                        session.removeAttribute("pendingConfirmSub");
-                        resp.sendRedirect("index.jsp");
-                        return;
-                    }
-                } catch (Exception dbEx) {
-                    log.warn("Could not check DB during ExpiredCodeException handling: {}", dbEx.getMessage());
-                }
-                session.setAttribute("error", "Code has expired. Please request a new one, or try logging in if you've already confirmed your email.");
-                resp.sendRedirect(confirmUrl);
 
             } catch (Exception e) {
                 log.error("Error confirming user: {}", e.getMessage(), e);
