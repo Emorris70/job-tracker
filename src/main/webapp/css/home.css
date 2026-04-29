@@ -880,4 +880,7 @@ body.sidebar-open {
         padding: 0;
         border-bottom: none;
     }
+    .main-header {
+        font-size: 18px;
+    }
 }
