@@ -19,6 +19,8 @@ import org.apache.logging.log4j.Logger;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.*;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * This authorization class manages end-user forwarding/redirection, handles
@@ -71,12 +73,20 @@ public class Auth extends HttpServlet {
 
         } else if ("resendCode".equals(req.getParameter("action"))) {
             String email = session != null ? (String) session.getAttribute("pendingConfirmEmail") : null;
+            if (email == null || email.isBlank()) email = req.getParameter("e");
+
+            String rSub = session != null ? (String) session.getAttribute("pendingConfirmSub") : null;
+            if (rSub == null || rSub.isBlank()) rSub = req.getParameter("s");
 
             if (email == null || email.isBlank()) {
                 if (session != null) session.setAttribute("error", "Session expired. Please sign up again.");
                 resp.sendRedirect("signup.jsp");
                 return;
             }
+
+            String confirmParams = "?e=" + URLEncoder.encode(email, StandardCharsets.UTF_8)
+                    + (rSub != null && !rSub.isBlank()
+                        ? "&s=" + URLEncoder.encode(rSub, StandardCharsets.UTF_8) : "");
 
             CognitoAuthService cognitoAuth = (CognitoAuthService) getServletContext().getAttribute("cognitoAuth");
             try {
@@ -88,7 +98,7 @@ public class Auth extends HttpServlet {
                 log.error("Error resending confirmation code: {}", e.getMessage(), e);
                 session.setAttribute("error", "Something went wrong please try again");
             }
-            resp.sendRedirect("confirm.jsp");
+            resp.sendRedirect("confirm.jsp" + confirmParams);
             return;
         }
 
@@ -152,7 +162,8 @@ public class Auth extends HttpServlet {
                 session.setAttribute("pendingConfirmEmail", email);
                 session.setAttribute("pendingConfirmSub", sub);
                 session.setAttribute("title", "confirm - Job Tracker");
-                resp.sendRedirect("confirm.jsp");
+                resp.sendRedirect("confirm.jsp?e=" + URLEncoder.encode(email, StandardCharsets.UTF_8)
+                        + "&s=" + URLEncoder.encode(sub, StandardCharsets.UTF_8));
 
             } catch (UsernameExistsException e) {
                 session.setAttribute("error", "An account with this email already exists");
@@ -179,18 +190,25 @@ public class Auth extends HttpServlet {
 
         } else if ("confirm".equals(action)) {
             String email = (String) session.getAttribute("pendingConfirmEmail");
-            String code = req.getParameter("v-code");
+            if (email == null || email.isBlank()) email = req.getParameter("pendingEmail");
 
             String pendingSub = (String) session.getAttribute("pendingConfirmSub");
+            if (pendingSub == null || pendingSub.isBlank()) pendingSub = req.getParameter("pendingSub");
+
+            String code = req.getParameter("v-code");
 
             if (email == null || email.isBlank() || pendingSub == null || pendingSub.isBlank()) {
                 session.setAttribute("error", "Session expired. Please sign up again.");
                 resp.sendRedirect("signup.jsp");
                 return;
             }
+
+            String confirmUrl = "confirm.jsp?e=" + URLEncoder.encode(email, StandardCharsets.UTF_8)
+                    + "&s=" + URLEncoder.encode(pendingSub, StandardCharsets.UTF_8);
+
             if (code == null || code.isBlank()) {
                 session.setAttribute("error", "Please enter your verification code");
-                resp.sendRedirect("confirm.jsp");
+                resp.sendRedirect(confirmUrl);
                 return;
             }
 
@@ -206,17 +224,16 @@ public class Auth extends HttpServlet {
 
             } catch (CodeMismatchException e) {
                 session.setAttribute("error", "Invalid verification code");
-                resp.sendRedirect("confirm.jsp");
+                resp.sendRedirect(confirmUrl);
 
             } catch (ExpiredCodeException e) {
-
                 session.setAttribute("error", "Code has expired please request a new one");
-                resp.sendRedirect("confirm.jsp");
+                resp.sendRedirect(confirmUrl);
 
             } catch (Exception e) {
                 log.error("Error confirming user: {}", e.getMessage(), e);
                 session.setAttribute("error", "Something went wrong please try again");
-                resp.sendRedirect("confirm.jsp");
+                resp.sendRedirect(confirmUrl);
 
             }
         } else if ("login".equals(action)) {
@@ -237,6 +254,16 @@ public class Auth extends HttpServlet {
 
                 GenericDao<User> userDao = new GenericDao<>(User.class);
                 java.util.List<User> users = userDao.findBy("sub", authUser.getSub());
+
+                if (users.isEmpty()) {
+                    log.warn("Cognito user has no DB record, auto-creating for sub: {}", authUser.getSub());
+                    try {
+                        userDao.insert(new User(authUser.getSub()));
+                        users = userDao.findBy("sub", authUser.getSub());
+                    } catch (Exception dbEx) {
+                        log.error("Failed to auto-create DB record for sub: {}", authUser.getSub(), dbEx);
+                    }
+                }
                 if (users.isEmpty()) {
                     log.error("Authenticated Cognito user has no matching DB record: {}", authUser.getSub());
                     session.setAttribute("error", "Account setup incomplete. Please contact support.");
@@ -312,6 +339,7 @@ public class Auth extends HttpServlet {
                 resp.sendRedirect("resetPassword.jsp");
                 return;
             }
+
             if (code == null || code.isBlank() || newPassword == null || newPassword.isBlank()) {
                 session.setAttribute("error", "Please fill out all required fields");
                 resp.sendRedirect("resetPasswordConfirm.jsp");
