@@ -202,7 +202,6 @@ public class Auth extends HttpServlet {
             try {
                 cognitoAuth.confirmSignUp(email, code);
 
-//                session.removeAttribute("pendingConfirmEmail");
                 session.setAttribute("successMsg", "Account confirmed! You can now log in.");
                 resp.sendRedirect("index.jsp");
 
@@ -211,10 +210,7 @@ public class Auth extends HttpServlet {
                 resp.sendRedirect(confirmUrl);
 
             } catch (NotAuthorizedException e) {
-                // User is already confirmed in Cognito — send them to login.
-                // The login flow will create the DB record if it doesn't exist yet.
                 log.warn("confirmSignUp: already confirmed for email: {}", email);
-//                session.removeAttribute("pendingConfirmEmail");
                 session.setAttribute("successMsg", "Your email is already confirmed. Please log in.");
                 resp.sendRedirect("index.jsp");
 
