@@ -154,7 +154,7 @@ public class Auth extends HttpServlet {
             try {
                 cognitoAuth.register(firstName, email, password);
 
-                session.setAttribute("pendingConfirmEmail", email);
+//                session.setAttribute("pendingConfirmEmail", email);
                 resp.sendRedirect("confirm.jsp?e=" + URLEncoder.encode(email, StandardCharsets.UTF_8));
 
             } catch (UsernameExistsException e) {
@@ -181,12 +181,11 @@ public class Auth extends HttpServlet {
             }
 
         } else if ("confirm".equals(action)) {
-            String email = (String) session.getAttribute("pendingConfirmEmail");
-            if (email == null || email.isBlank()) email = req.getParameter("pendingEmail");
-
+            String email = req.getParameter("e");
             String code = req.getParameter("v-code");
 
             if (email == null || email.isBlank()) {
+                log.warn("confirm: email is null or blank");
                 session.setAttribute("error", "Missing email. Please sign up again.");
                 resp.sendRedirect("signup.jsp");
                 return;
@@ -203,7 +202,7 @@ public class Auth extends HttpServlet {
             try {
                 cognitoAuth.confirmSignUp(email, code);
 
-                session.removeAttribute("pendingConfirmEmail");
+//                session.removeAttribute("pendingConfirmEmail");
                 session.setAttribute("successMsg", "Account confirmed! You can now log in.");
                 resp.sendRedirect("index.jsp");
 
@@ -215,7 +214,7 @@ public class Auth extends HttpServlet {
                 // User is already confirmed in Cognito — send them to login.
                 // The login flow will create the DB record if it doesn't exist yet.
                 log.warn("confirmSignUp: already confirmed for email: {}", email);
-                session.removeAttribute("pendingConfirmEmail");
+//                session.removeAttribute("pendingConfirmEmail");
                 session.setAttribute("successMsg", "Your email is already confirmed. Please log in.");
                 resp.sendRedirect("index.jsp");
 

@@ -11,10 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9573e47b-8e41-4860-b0ac-c41935902eaa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/AccountSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/AccountSettings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Auth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Auth.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/entity/AuthenticatedUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/entity/AuthenticatedUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/persistence/CognitoAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/persistence/CognitoAuthService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/confirm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/confirm.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +23,7 @@
     <execution />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="86" />
+    <option name="cachedIndexableFilesCount" value="87" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -306,7 +303,7 @@
       <workItem from="1777414167806" duration="1123000" />
       <workItem from="1777415762122" duration="12000" />
       <workItem from="1777418181688" duration="3362000" />
-      <workItem from="1777423121033" duration="9026000" />
+      <workItem from="1777423121033" duration="13006000" />
     </task>
     <servers />
   </component>

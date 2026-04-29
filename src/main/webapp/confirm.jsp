@@ -17,7 +17,7 @@
         </c:if>
     </div>
     <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-exists">
-        <input type="hidden" name="pendingEmail" value="${fn:escapeXml(param.e)}">
+        <input type="hidden" name="e" value="${param.e}">
         <div class="con-wrapper">
             <label for="v-code">Verification code</label>
             <div class="input-wrapper">
