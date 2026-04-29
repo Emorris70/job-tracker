@@ -227,28 +227,28 @@ public class Auth extends HttpServlet {
                 resp.sendRedirect(confirmUrl);
 
             } catch (NotAuthorizedException e) {
-                // Cognito returns this specific error when the user is already CONFIRMED.
-                // The error message itself is the proof — no admin API call needed.
-                // This happens when: confirmSignUp succeeded but DB insert failed previously,
-                // or when the user re-submits the form after already confirming.
-                log.warn("confirmSignUp: user already confirmed in Cognito — completing DB setup for sub: {}", pendingSub);
-                try {
-                    GenericDao<User> userDao = new GenericDao<>(User.class);
-                    java.util.List<User> existing = userDao.findBy("sub", pendingSub);
-                    if (existing.isEmpty()) {
-                        userDao.insert(new User(pendingSub));
-                    }
-                    session.removeAttribute("pendingConfirmEmail");
-                    session.removeAttribute("pendingConfirmSub");
-                    resp.sendRedirect("index.jsp");
-                } catch (Exception dbEx) {
-                    log.error("Failed to complete DB setup for already-confirmed user sub: {}", pendingSub, dbEx);
-                    session.setAttribute("error", "Something went wrong please try again");
-                    resp.sendRedirect(confirmUrl);
-                }
+                // Cognito returns this when the user is already CONFIRMED — no admin API needed.
+                // Happens when confirmSignUp succeeded previously but DB insert failed,
+                // or the user re-submits the form after already confirming.
+                completeDbSetup(pendingSub, session, resp, confirmUrl, log);
 
             } catch (ExpiredCodeException e) {
-                session.setAttribute("error", "Code has expired. Please request a new one.");
+                // Cognito sometimes returns ExpiredCodeException instead of NotAuthorizedException
+                // when the user is already confirmed but the code has since expired.
+                // Check our DB first — if the record exists the user is fully set up already.
+                try {
+                    GenericDao<User> userDao = new GenericDao<>(User.class);
+                    if (!userDao.findBy("sub", pendingSub).isEmpty()) {
+                        log.warn("ExpiredCodeException but user already in DB — redirecting to login for sub: {}", pendingSub);
+                        session.removeAttribute("pendingConfirmEmail");
+                        session.removeAttribute("pendingConfirmSub");
+                        resp.sendRedirect("index.jsp");
+                        return;
+                    }
+                } catch (Exception dbEx) {
+                    log.warn("Could not check DB during ExpiredCodeException handling: {}", dbEx.getMessage());
+                }
+                session.setAttribute("error", "Code has expired. Please request a new one, or try logging in if you've already confirmed your email.");
                 resp.sendRedirect(confirmUrl);
 
             } catch (Exception e) {
@@ -397,6 +397,30 @@ public class Auth extends HttpServlet {
             }
         }
 
+    }
+
+    private void completeDbSetup(String pendingSub, HttpSession session,
+                                  HttpServletResponse resp, String confirmUrl,
+                                  org.apache.logging.log4j.Logger logger)
+            throws IOException {
+        logger.warn("confirmSignUp: user already confirmed in Cognito — completing DB setup for sub: {}", pendingSub);
+        try {
+            GenericDao<User> userDao = new GenericDao<>(User.class);
+            java.util.List<User> existing = userDao.findBy("sub", pendingSub);
+            if (existing.isEmpty()) {
+                userDao.insert(new User(pendingSub));
+                logger.info("DB record created for sub: {}", pendingSub);
+            } else {
+                logger.info("DB record already exists for sub: {} — skipping insert", pendingSub);
+            }
+            session.removeAttribute("pendingConfirmEmail");
+            session.removeAttribute("pendingConfirmSub");
+            resp.sendRedirect("index.jsp");
+        } catch (Exception dbEx) {
+            logger.error("Failed to complete DB setup for already-confirmed user sub: {}", pendingSub, dbEx);
+            session.setAttribute("error", "Something went wrong please try again");
+            resp.sendRedirect(confirmUrl);
+        }
     }
 
 }

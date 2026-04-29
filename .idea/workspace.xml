@@ -123,6 +123,19 @@
       <recent name="E:\User\emorr2.0\job-tracker\src\main\webapp\WEB-INF\jsp\includes" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="configurationStatuses">
+      <map>
+        <entry key="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
+          <value>
+            <map>
+              <entry key="Tomcat 10.1" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 10.1">
     <configuration name="ConnectionTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tracker_test.persistence.ConnectionTest" />
@@ -289,7 +302,7 @@
       <workItem from="1777414167806" duration="1123000" />
       <workItem from="1777415762122" duration="12000" />
       <workItem from="1777418181688" duration="3362000" />
-      <workItem from="1777423121033" duration="3815000" />
+      <workItem from="1777423121033" duration="5233000" />
     </task>
     <servers />
   </component>
