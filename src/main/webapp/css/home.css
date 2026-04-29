@@ -85,7 +85,7 @@ main {
 }
 .main-header {
     text-align: center;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 600;
 }
 .h-2 {
@@ -879,8 +879,5 @@ body.sidebar-open {
     .detail-grid .detail-item {
         padding: 0;
         border-bottom: none;
-    }
-    .main-header {
-        font-size: 18px;
     }
 }
