@@ -224,7 +224,6 @@ public class Auth extends HttpServlet {
 
                 session.removeAttribute("pendingConfirmEmail");
                 session.removeAttribute("pendingConfirmSub");
-                session.setAttribute("successMsg", "Account confirmed! You can now log in.");
                 resp.sendRedirect("index.jsp");
 
             } catch (CodeMismatchException e) {
@@ -403,7 +402,6 @@ public class Auth extends HttpServlet {
             }
             session.removeAttribute("pendingConfirmEmail");
             session.removeAttribute("pendingConfirmSub");
-            session.setAttribute("successMsg", "Account confirmed! You can now log in.");
             resp.sendRedirect("index.jsp");
         } catch (Exception dbEx) {
             logger.error("Failed to complete DB setup for already-confirmed user sub: {}", pendingSub, dbEx);
