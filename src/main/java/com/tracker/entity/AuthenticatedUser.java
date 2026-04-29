@@ -9,6 +9,7 @@ public class AuthenticatedUser {
     private final String sub;
     private final String email;
     private final String firstName;
+    private String accessToken;
 
     /**
      * Instantiates a new AuthenticatedUser.
@@ -26,4 +27,6 @@ public class AuthenticatedUser {
     public String getSub() { return sub; }
     public String getEmail() { return email; }
     public String getFirstName() { return firstName; }
+    public String getAccessToken() { return accessToken; }
+    public void setAccessToken(String accessToken) { this.accessToken = accessToken; }
 }

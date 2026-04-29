@@ -75,18 +75,13 @@ public class Auth extends HttpServlet {
             String email = session != null ? (String) session.getAttribute("pendingConfirmEmail") : null;
             if (email == null || email.isBlank()) email = req.getParameter("e");
 
-            String rSub = session != null ? (String) session.getAttribute("pendingConfirmSub") : null;
-            if (rSub == null || rSub.isBlank()) rSub = req.getParameter("s");
-
             if (email == null || email.isBlank()) {
                 if (session != null) session.setAttribute("error", "Session expired. Please sign up again.");
                 resp.sendRedirect("signup.jsp");
                 return;
             }
 
-            String confirmParams = "?e=" + URLEncoder.encode(email, StandardCharsets.UTF_8)
-                    + (rSub != null && !rSub.isBlank()
-                        ? "&s=" + URLEncoder.encode(rSub, StandardCharsets.UTF_8) : "");
+            String confirmParams = "?e=" + URLEncoder.encode(email, StandardCharsets.UTF_8);
 
             CognitoAuthService cognitoAuth = (CognitoAuthService) getServletContext().getAttribute("cognitoAuth");
             try {
@@ -157,13 +152,10 @@ public class Auth extends HttpServlet {
             }
 
             try {
-                String sub = cognitoAuth.register(firstName, email, password);
+                cognitoAuth.register(firstName, email, password);
 
                 session.setAttribute("pendingConfirmEmail", email);
-                session.setAttribute("pendingConfirmSub", sub);
-                session.setAttribute("title", "confirm - Job Tracker");
-                resp.sendRedirect("confirm.jsp?e=" + URLEncoder.encode(email, StandardCharsets.UTF_8)
-                        + "&s=" + URLEncoder.encode(sub, StandardCharsets.UTF_8));
+                resp.sendRedirect("confirm.jsp?e=" + URLEncoder.encode(email, StandardCharsets.UTF_8));
 
             } catch (UsernameExistsException e) {
                 session.setAttribute("error", "An account with this email already exists");
@@ -192,19 +184,15 @@ public class Auth extends HttpServlet {
             String email = (String) session.getAttribute("pendingConfirmEmail");
             if (email == null || email.isBlank()) email = req.getParameter("pendingEmail");
 
-            String pendingSub = (String) session.getAttribute("pendingConfirmSub");
-            if (pendingSub == null || pendingSub.isBlank()) pendingSub = req.getParameter("pendingSub");
-
             String code = req.getParameter("v-code");
 
-            if (email == null || email.isBlank() || pendingSub == null || pendingSub.isBlank()) {
-                session.setAttribute("error", "Session expired. Please sign up again.");
+            if (email == null || email.isBlank()) {
+                session.setAttribute("error", "Missing email. Please sign up again.");
                 resp.sendRedirect("signup.jsp");
                 return;
             }
 
-            String confirmUrl = "confirm.jsp?e=" + URLEncoder.encode(email, StandardCharsets.UTF_8)
-                    + "&s=" + URLEncoder.encode(pendingSub, StandardCharsets.UTF_8);
+            String confirmUrl = "confirm.jsp?e=" + URLEncoder.encode(email, StandardCharsets.UTF_8);
 
             if (code == null || code.isBlank()) {
                 session.setAttribute("error", "Please enter your verification code");
@@ -215,28 +203,25 @@ public class Auth extends HttpServlet {
             try {
                 cognitoAuth.confirmSignUp(email, code);
 
-                // Check before insert: a prior attempt may have created the record
-                // if Cognito confirmed the user but returned an exception (race condition).
-                GenericDao<User> userDao = new GenericDao<>(User.class);
-                if (userDao.findBy("sub", pendingSub).isEmpty()) {
-                    userDao.insert(new User(pendingSub));
-                }
-
                 session.removeAttribute("pendingConfirmEmail");
-                session.removeAttribute("pendingConfirmSub");
+                session.setAttribute("successMsg", "Account confirmed! You can now log in.");
                 resp.sendRedirect("index.jsp");
 
             } catch (CodeMismatchException e) {
                 session.setAttribute("error", "Invalid verification code");
                 resp.sendRedirect(confirmUrl);
 
-            } catch (NotAuthorizedException | ExpiredCodeException e) {
-                // Both exceptions occur when Cognito confirms the user internally but
-                // returns an error to the caller — a known Cognito race condition on Railway.
-                // NotAuthorizedException: "Current status is CONFIRMED"
-                // ExpiredCodeException: Cognito confirmed the user but the code timestamp is stale
-                // In both cases, complete DB setup and redirect to login.
-                completeDbSetup(pendingSub, session, resp, confirmUrl, log);
+            } catch (NotAuthorizedException e) {
+                // User is already confirmed in Cognito — send them to login.
+                // The login flow will create the DB record if it doesn't exist yet.
+                log.warn("confirmSignUp: already confirmed for email: {}", email);
+                session.removeAttribute("pendingConfirmEmail");
+                session.setAttribute("successMsg", "Your email is already confirmed. Please log in.");
+                resp.sendRedirect("index.jsp");
+
+            } catch (ExpiredCodeException e) {
+                session.setAttribute("error", "Code has expired. Please request a new one.");
+                resp.sendRedirect(confirmUrl);
 
             } catch (Exception e) {
                 log.error("Error confirming user: {}", e.getMessage(), e);
@@ -260,23 +245,14 @@ public class Auth extends HttpServlet {
                 AuthenticationResultType result = cognitoAuth.login(email, password);
                 AuthenticatedUser authUser = tokenVerifier.verify(result.idToken());
 
+                authUser.setAccessToken(result.accessToken());
+
                 GenericDao<User> userDao = new GenericDao<>(User.class);
                 java.util.List<User> users = userDao.findBy("sub", authUser.getSub());
 
                 if (users.isEmpty()) {
-                    log.warn("Cognito user has no DB record, auto-creating for sub: {}", authUser.getSub());
-                    try {
-                        userDao.insert(new User(authUser.getSub()));
-                        users = userDao.findBy("sub", authUser.getSub());
-                    } catch (Exception dbEx) {
-                        log.error("Failed to auto-create DB record for sub: {}", authUser.getSub(), dbEx);
-                    }
-                }
-                if (users.isEmpty()) {
-                    log.error("Authenticated Cognito user has no matching DB record: {}", authUser.getSub());
-                    session.setAttribute("error", "Account setup incomplete. Please contact support.");
-                    resp.sendRedirect("index.jsp");
-                    return;
+                    userDao.insert(new User(authUser.getSub()));
+                    users = userDao.findBy("sub", authUser.getSub());
                 }
 
                 // Session fixation prevention: invalidate old session and create fresh one
@@ -384,30 +360,6 @@ public class Auth extends HttpServlet {
             }
         }
 
-    }
-
-    private void completeDbSetup(String pendingSub, HttpSession session,
-                                  HttpServletResponse resp, String confirmUrl,
-                                  org.apache.logging.log4j.Logger logger)
-            throws IOException {
-        logger.warn("confirmSignUp: user already confirmed in Cognito — completing DB setup for sub: {}", pendingSub);
-        try {
-            GenericDao<User> userDao = new GenericDao<>(User.class);
-            java.util.List<User> existing = userDao.findBy("sub", pendingSub);
-            if (existing.isEmpty()) {
-                userDao.insert(new User(pendingSub));
-                logger.info("DB record created for sub: {}", pendingSub);
-            } else {
-                logger.info("DB record already exists for sub: {} — skipping insert", pendingSub);
-            }
-            session.removeAttribute("pendingConfirmEmail");
-            session.removeAttribute("pendingConfirmSub");
-            resp.sendRedirect("index.jsp");
-        } catch (Exception dbEx) {
-            logger.error("Failed to complete DB setup for already-confirmed user sub: {}", pendingSub, dbEx);
-            session.setAttribute("error", "Something went wrong please try again");
-            resp.sendRedirect(confirmUrl);
-        }
     }
 
 }

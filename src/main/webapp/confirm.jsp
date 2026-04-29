@@ -18,7 +18,6 @@
     </div>
     <form method="POST" action="${pageContext.request.contextPath}/auth" id="auth-exists">
         <input type="hidden" name="pendingEmail" value="${fn:escapeXml(param.e)}">
-        <input type="hidden" name="pendingSub" value="${fn:escapeXml(param.s)}">
         <div class="con-wrapper">
             <label for="v-code">Verification code</label>
             <div class="input-wrapper">
@@ -36,7 +35,6 @@
     <c:url value="${pageContext.request.contextPath}/auth" var="resendUrl">
         <c:param name="action" value="resendCode"/>
         <c:param name="e" value="${param.e}"/>
-        <c:param name="s" value="${param.s}"/>
     </c:url>
     <a href="${resendUrl}">Resend code</a>
 </main>

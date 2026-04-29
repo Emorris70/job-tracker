@@ -96,8 +96,16 @@ public class AccountSettings extends HttpServlet {
             return;
         }
 
+        String accessToken = authUser.getAccessToken();
+        if (accessToken == null || accessToken.isBlank()) {
+            log.error("No access token in session for user {} — cannot delete account", dbUser.getId());
+            session.setAttribute("settingsError", "Session has expired. Please log in again to delete your account.");
+            resp.sendRedirect(req.getContextPath() + "/settings");
+            return;
+        }
+
         try {
-            cognitoAuth.deleteUser(authUser.getEmail());
+            cognitoAuth.deleteUserSelf(accessToken);
 
             User managed = userDao.getById(dbUser.getId());
             if (managed != null) {
