@@ -67,6 +67,41 @@
                 </div>
             </div>
 
+            <%-- Pipeline Section --%>
+            <div class="detail-block detail-grid-b">
+                <h3 class="sub-head">Pipeline</h3>
+                <div class="pipeline-bar">
+                    <c:forEach var="step" items="${pipelineSteps}" varStatus="loop">
+                        <div class="pipeline-step ${step.stepClass}">
+                            <div class="step-dot"></div>
+                            <span class="step-name">${step.status}</span>
+                            <c:if test="${not empty step.enteredAt}">
+                                <span class="step-date">${step.enteredAt}</span>
+                                <span class="step-duration">${step.duration}</span>
+                            </c:if>
+                        </div>
+                        <c:if test="${!loop.last}">
+                            <div class="pipeline-connector ${step.connectorClass}"></div>
+                        </c:if>
+                    </c:forEach>
+                </div>
+                <form action="${pageContext.request.contextPath}/update-status" method="POST" class="status-update-row">
+                    <input type="hidden" name="jobId" value="${job.id}">
+                    <div class="status-select-wrap">
+                        <label class="status-select-label">Move to</label>
+                        <select name="status" class="status-select">
+                            <option value="Applied" ${job.status == 'Applied' ? 'selected' : ''}>Applied</option>
+                            <option value="Screening" ${job.status == 'Screening' ? 'selected' : ''}>Screening</option>
+                            <option value="Interview" ${job.status == 'Interview' ? 'selected' : ''}>Interview</option>
+                            <option value="Offer" ${job.status == 'Offer' ? 'selected' : ''}>Offer</option>
+                            <option value="Rejected" ${job.status == 'Rejected' ? 'selected' : ''}>Rejected</option>
+                            <option value="Withdrawn" ${job.status == 'Withdrawn' ? 'selected' : ''}>Withdrawn</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary">Update</button>
+                </form>
+            </div>
+
             <%-- External Link Section --%>
             <c:if test="${not empty job.jobUrl}">
                 <div class="detail-block detail-grid-b">

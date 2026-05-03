@@ -1,6 +1,7 @@
 package com.tracker.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
@@ -8,13 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Represents a registered user, identified by their AWS Cognito subject (sub).
+ *
+ * @author EmileM
+ */
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name="native", strategy = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     private int id;
 
     @Column(name = "cognito_sub", unique = true, nullable = false)
@@ -30,22 +38,15 @@ public class User {
     private List<Job> jobs = new ArrayList<>();
 
     /**
-     * Instantiates a new User object.
-     */
-    public User() {}
-
-    /**
-     * Instantiates a new User object.
-     * And initializes the unique identifier.
-     *
-     * @param sub The unique identifier from Cognito.
+     * @param sub the unique Cognito subject identifier for this user.
      */
     public User(String sub) {
         this.sub = sub;
     }
 
     /**
-     * Adds a job to the list of jobs.
+     * Adds a job to this user's list and sets the owning side of the relationship.
+     *
      * @param job the job to add.
      */
     public void addJob(Job job) {
@@ -53,73 +54,13 @@ public class User {
         job.setUser(this);
     }
 
-
     /**
-     * Removes a job from the list of jobs.
+     * Removes a job from this user's list and clears the owning side of the relationship.
+     *
      * @param job the job to remove.
      */
     public void removeJob(Job job) {
         this.jobs.remove(job);
         job.setUser(null);
-    }
-
-    /**
-     * Gets the list of jobs.
-     * @return the list of jobs.
-     */
-    public List<Job> getJobs() {
-        return jobs;
-    }
-
-    /**
-     * Sets the list of jobs.
-     * @param jobs the list of jobs.
-     */
-    public void setJobs(List<Job> jobs) {
-        this.jobs = jobs;
-    }
-
-    /**
-     * Gets the identifier from the database.
-     * @return the unique identifier.
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Sets the identifier from the database.
-     * @param id the unique identifier.
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     * Gets the unique identifier from Cognito.
-     * @return the cognito unique identifier.
-     */
-    public String getSub() {
-        return sub;
-    }
-
-    /**
-     * Sets the unique identifier from Cognito.
-     * @param sub the cognito unique identifier.
-     */
-    public void setSub(String sub) {
-        this.sub = sub;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id && Objects.equals(sub, user.sub);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, sub);
     }
 }

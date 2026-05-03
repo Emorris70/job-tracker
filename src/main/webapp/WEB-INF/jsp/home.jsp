@@ -64,9 +64,11 @@
                     <label>Status<span class="required-star">*</span></label>
                     <select name="status" required>
                         <option value="Applied">Applied</option>
-                        <option value="Interviewing">Interviewing</option>
+                        <option value="Screening">Screening</option>
+                        <option value="Interview">Interview</option>
                         <option value="Offer">Offer</option>
                         <option value="Rejected">Rejected</option>
+                        <option value="Withdrawn">Withdrawn</option>
                     </select>
                 </div>
 
@@ -90,7 +92,27 @@
                 </div>
             </form>
         </div>
-        <div class="card-page-d">
+        <%-- Stats Bar --%>
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-value">${statTotal}</span>
+                <span class="stat-label">Total</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">${statActive}</span>
+                <span class="stat-label">Active</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">${statInterviewRate}</span>
+                <span class="stat-label">Interview Rate</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">${statOfferRate}</span>
+                <span class="stat-label">Offer Rate</span>
+            </div>
+        </div>
+
+<div class="card-page-d">
             <c:choose>
                 <c:when test="${not empty jobs}">
                     <c:forEach var="job" items="${jobs}">

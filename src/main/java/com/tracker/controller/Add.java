@@ -2,6 +2,7 @@ package com.tracker.controller;
 
 import com.tracker.entity.Job;
 import com.tracker.entity.User;
+import com.tracker.persistence.ApplicationStatusHistoryDao;
 import com.tracker.persistence.GenericDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,10 +21,12 @@ import java.time.format.DateTimeParseException;
 public class Add  extends HttpServlet{
     private static final Logger log = LogManager.getLogger(Add.class);
     private GenericDao<Job> jobDao;
+    private ApplicationStatusHistoryDao historyDao;
 
     @Override
     public void init() throws ServletException {
         jobDao = new GenericDao<>(Job.class);
+        historyDao = new ApplicationStatusHistoryDao();
     }
 
     /**
@@ -75,8 +78,10 @@ public class Add  extends HttpServlet{
             }
 
             LocalDate dateApplied = LocalDate.parse(dateStr);
-            Job newjob = new Job(user, company, title, location, salary, status, url, description, dateApplied);
+            String effectiveStatus = (status != null && !status.isBlank()) ? status : "Applied";
+            Job newjob = new Job(user, company, title, location, salary, effectiveStatus, url, description, dateApplied);
             int insertedId = jobDao.insert(newjob);
+            historyDao.recordInitialStatus(insertedId, effectiveStatus);
 
             log.info("Job added with ID: {}", insertedId);
             resp.sendRedirect(req.getContextPath() + "/home");

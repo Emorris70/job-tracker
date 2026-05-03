@@ -1,7 +1,11 @@
 package com.tracker.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -9,6 +13,8 @@ import java.util.Objects;
  *
  * @author EmileM
  */
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "applications")
 public class Job {
@@ -45,28 +51,23 @@ public class Job {
     @JoinColumn(name = "user_id")
     private User user;
 
-    /**
-     * Instantiates a new Job object.
-     */
-    public Job() {
-    }
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<ApplicationStatusHistory> statusHistory = new ArrayList<>();
 
     /**
-     * Instantiates a new Job object.
-     * And initializes the unique identifier.
-     *
-     * @param user the user who applied for the job.
+     * @param user the user who applied.
      * @param companyName the company name.
      * @param jobTitle the job title.
-     * @param location the location.
+     * @param location the job location.
      * @param salaryRange the salary range.
-     * @param status the status.
-     * @param jobUrl the job url.
+     * @param status the initial application status.
+     * @param jobUrl the URL of the job posting.
+     * @param description the job description.
+     * @param dateApplied the date the application was submitted.
      */
-    public Job( User user, String companyName, String jobTitle, String location,
+    public Job(User user, String companyName, String jobTitle, String location,
                String salaryRange, String status, String jobUrl,
-                String description, LocalDate dateApplied)
-    {
+               String description, LocalDate dateApplied) {
         this.user = user;
         this.companyName = companyName;
         this.jobTitle = jobTitle;
@@ -76,106 +77,5 @@ public class Job {
         this.jobUrl = jobUrl;
         this.description = description;
         this.dateApplied = dateApplied;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getJobTitle() {
-        return jobTitle;
-    }
-
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getSalaryRange() {
-        return salaryRange;
-    }
-
-    public void setSalaryRange(String salaryRange) {
-        this.salaryRange = salaryRange;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getJobUrl() {
-        return jobUrl;
-    }
-
-    public void setJobUrl(String jobUrl) {
-        this.jobUrl = jobUrl;
-    }
-
-    public LocalDate getDateApplied() {
-        return dateApplied;
-    }
-
-    public void setDateApplied(LocalDate dateApplied) {
-        this.dateApplied = dateApplied;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Job job = (Job) o;
-        return id == job.id && Objects.equals(companyName, job.companyName)
-                && Objects.equals(jobTitle, job.jobTitle)
-                && Objects.equals(location, job.location)
-                && Objects.equals(salaryRange, job.salaryRange)
-                && Objects.equals(status, job.status)
-                && Objects.equals(jobUrl, job.jobUrl)
-                && Objects.equals(dateApplied, job.dateApplied)
-                && Objects.equals(description, job.description)
-                && Objects.equals(user, job.user);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, companyName, jobTitle, location,
-                salaryRange, status, jobUrl, dateApplied, description, user);
     }
 }
