@@ -11,7 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9573e47b-8e41-4860-b0ac-c41935902eaa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/entity/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/entity/Job.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +81,9 @@
   "keyToString": {
     "Application.ConnectionTest.executor": "Run",
     "DefaultHtmlFileTemplate": "HTML File",
+    "JUnit.ApplicationStatusHistoryTest.executor": "Coverage",
     "JUnit.AuthenticatedUserTest.executor": "Run",
+    "JUnit.JobTest.executor": "Coverage",
     "JavaScript Debug.test.html.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "Maven.job-tracker [clean].executor": "Run",
@@ -139,7 +140,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.AuthenticatedUserTest">
+  <component name="RunManager" selected="JUnit.ApplicationStatusHistoryTest">
     <configuration name="ConnectionTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tracker_test.persistence.ConnectionTest" />
       <module name="job-tracker" />
@@ -153,16 +154,46 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ApplicationStatusHistoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="job-tracker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.tracker.entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.tracker.entity" />
+      <option name="MAIN_CLASS_NAME" value="com.tracker.entity.ApplicationStatusHistoryTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AuthenticatedUserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="job-tracker" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.tracker_test.entity.*" />
+          <option name="PATTERN" value="com.tracker.entity.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.tracker_test.entity" />
-      <option name="MAIN_CLASS_NAME" value="com.tracker_test.entity.AuthenticatedUserTest" />
+      <option name="PACKAGE_NAME" value="com.tracker.entity" />
+      <option name="MAIN_CLASS_NAME" value="com.tracker.entity.AuthenticatedUserTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JobTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="job-tracker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.tracker.entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.tracker.entity" />
+      <option name="MAIN_CLASS_NAME" value="com.tracker.entity.JobTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -258,11 +289,15 @@
     </configuration>
     <list>
       <item itemvalue="Application.ConnectionTest" />
+      <item itemvalue="JUnit.ApplicationStatusHistoryTest" />
       <item itemvalue="JUnit.AuthenticatedUserTest" />
+      <item itemvalue="JUnit.JobTest" />
       <item itemvalue="Tomcat Server.Tomcat 10.1" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ApplicationStatusHistoryTest" />
+        <item itemvalue="JUnit.JobTest" />
         <item itemvalue="JUnit.AuthenticatedUserTest" />
         <item itemvalue="Application.ConnectionTest" />
       </list>
@@ -329,11 +364,19 @@
       <workItem from="1777644937907" duration="2294000" />
       <workItem from="1777737324026" duration="1062000" />
       <workItem from="1777832033873" duration="2174000" />
-      <workItem from="1777904848484" duration="3542000" />
+      <workItem from="1777904848484" duration="3904000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/job_tracker$ApplicationStatusHistoryTest.ic" NAME="ApplicationStatusHistoryTest Coverage Results" MODIFIED="1777926776492" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.tracker_test.entity.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/job_tracker$JobTest.ic" NAME="JobTest Coverage Results" MODIFIED="1777927073356" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.tracker.entity.*</FILTER>
+    </SUITE>
   </component>
 </project>

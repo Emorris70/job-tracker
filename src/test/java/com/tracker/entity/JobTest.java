@@ -1,7 +1,5 @@
-package com.tracker_test.entity;
+package com.tracker.entity;
 
-import com.tracker.entity.Job;
-import com.tracker.entity.User;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

@@ -1,6 +1,5 @@
-package com.tracker_test.entity;
+package com.tracker.entity;
 
-import com.tracker.entity.AuthenticatedUser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
