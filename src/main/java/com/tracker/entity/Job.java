@@ -9,7 +9,11 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents a job application.
+ * Represents a job application persisted in the {@code applications} table.
+ * <p>
+ * {@code status} defaults to {@code "Applied"} and {@code dateApplied} defaults
+ * to the current date when the no-arg constructor is used.
+ * </p>
  *
  * @author EmileM
  */
