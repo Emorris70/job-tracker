@@ -6,7 +6,6 @@ import com.tracker.persistence.CognitoAuthService;
 import com.tracker.persistence.GenericDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -22,7 +21,7 @@ import java.io.IOException;
  * @author EmileM
  */
 @WebServlet(urlPatterns = "/settings")
-public class AccountSettings extends HttpServlet {
+public class AccountSettings extends BaseServlet {
     private static final Logger log = LogManager.getLogger(AccountSettings.class);
     private GenericDao<User> userDao;
 
@@ -49,11 +48,7 @@ public class AccountSettings extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect(req.getContextPath() + "/index.jsp");
-            return;
-        }
+        if (requireAuth(req, resp) == null) return;
         req.getRequestDispatcher("/WEB-INF/jsp/settings.jsp").forward(req, resp);
     }
 
@@ -72,11 +67,8 @@ public class AccountSettings extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect(req.getContextPath() + "/index.jsp");
-            return;
-        }
+        HttpSession session = requireAuth(req, resp);
+        if (session == null) return;
 
         if (!"deleteAccount".equals(req.getParameter("action"))) {
             resp.sendRedirect(req.getContextPath() + "/settings");

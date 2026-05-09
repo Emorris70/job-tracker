@@ -7,7 +7,6 @@ import com.tracker.persistence.ApplicationStatusHistoryDao;
 import com.tracker.persistence.JobDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -30,7 +29,7 @@ import java.util.*;
  * @author EmileM
  */
 @WebServlet(urlPatterns = "/view")
-public class View extends HttpServlet {
+public class View extends BaseServlet {
     private static final Logger log = LogManager.getLogger(View.class);
     private static final List<String> MAIN_STAGES = List.of("Applied", "Screening", "Interview", "Offer");
     private static final Set<String> TERMINAL_STATUSES = Set.of("Rejected", "Withdrawn");
@@ -58,12 +57,8 @@ public class View extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        HttpSession session = req.getSession(false);
-
-        if (session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect(req.getContextPath() + "/index.jsp");
-            return;
-        }
+        HttpSession session = requireAuth(req, resp);
+        if (session == null) return;
 
         String idParam = req.getParameter("id");
         if (idParam == null || idParam.isBlank()) {

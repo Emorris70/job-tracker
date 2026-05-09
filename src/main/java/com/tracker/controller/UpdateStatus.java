@@ -6,7 +6,6 @@ import com.tracker.persistence.ApplicationStatusHistoryDao;
 import com.tracker.persistence.JobDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -28,7 +27,7 @@ import java.util.Set;
  * @author EmileM
  */
 @WebServlet(urlPatterns = "/update-status")
-public class UpdateStatus extends HttpServlet {
+public class UpdateStatus extends BaseServlet {
     private static final Logger log = LogManager.getLogger(UpdateStatus.class);
     private static final Set<String> VALID_STATUSES = Set.of(
         "Applied", "Screening", "Interview", "Offer", "Rejected", "Withdrawn"
@@ -54,12 +53,8 @@ public class UpdateStatus extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        HttpSession session = req.getSession(false);
-
-        if (session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect(req.getContextPath() + "/index.jsp");
-            return;
-        }
+        HttpSession session = requireAuth(req, resp);
+        if (session == null) return;
 
         String idParam = req.getParameter("jobId");
         String newStatus = req.getParameter("status");

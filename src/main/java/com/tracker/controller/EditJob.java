@@ -5,7 +5,6 @@ import com.tracker.entity.User;
 import com.tracker.persistence.JobDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -22,7 +21,7 @@ import java.time.format.DateTimeParseException;
  * @author EmileM
  */
 @WebServlet(urlPatterns = "/edit")
-public class EditJob extends HttpServlet {
+public class EditJob extends BaseServlet {
     private static final Logger log = LogManager.getLogger(EditJob.class);
     private JobDao jobDao;
 
@@ -38,11 +37,8 @@ public class EditJob extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect(req.getContextPath() + "/index.jsp");
-            return;
-        }
+        HttpSession session = requireAuth(req, resp);
+        if (session == null) return;
 
         Job job = resolveOwnedJob(req, resp, session);
         if (job == null) return;
@@ -58,11 +54,8 @@ public class EditJob extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect(req.getContextPath() + "/index.jsp");
-            return;
-        }
+        HttpSession session = requireAuth(req, resp);
+        if (session == null) return;
 
         Job job = resolveOwnedJob(req, resp, session);
         if (job == null) return;

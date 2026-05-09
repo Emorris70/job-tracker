@@ -6,7 +6,6 @@ import com.tracker.persistence.ApplicationStatusHistoryDao;
 import com.tracker.persistence.GenericDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -18,7 +17,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 @WebServlet(urlPatterns = "/add")
-public class Add  extends HttpServlet{
+public class Add extends BaseServlet {
     private static final Logger log = LogManager.getLogger(Add.class);
     private GenericDao<Job> jobDao;
     private ApplicationStatusHistoryDao historyDao;
@@ -41,11 +40,8 @@ public class Add  extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException
     {
-        HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect(req.getContextPath() + "/index.jsp");
-            return;
-        }
+        HttpSession session = requireAuth(req, resp);
+        if (session == null) return;
 
         User user = (User) session.getAttribute("dbUser");
 

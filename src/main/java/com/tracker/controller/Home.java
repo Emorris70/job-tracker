@@ -5,7 +5,6 @@ import com.tracker.entity.User;
 import com.tracker.persistence.JobDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -31,7 +30,7 @@ import java.util.*;
  * @author EmileM
  */
 @WebServlet(urlPatterns = "/home")
-public class Home extends HttpServlet {
+public class Home extends BaseServlet {
     private static final Logger log = LogManager.getLogger(Home.class);
     private static final Set<String> TERMINAL = Set.of("Rejected", "Withdrawn");
     private static final Set<String> INTERVIEW_OR_BEYOND = Set.of("Interview", "Interviewing", "Offer");
@@ -59,13 +58,8 @@ public class Home extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        HttpSession session = req.getSession(false);
-
-        if (session == null || session.getAttribute("user") == null) {
-            log.warn("Unauthorized access attempt to home page.");
-            resp.sendRedirect(req.getContextPath() + "/index.jsp");
-            return;
-        }
+        HttpSession session = requireAuth(req, resp);
+        if (session == null) return;
 
         User dbUser = (User) session.getAttribute("dbUser");
         if (dbUser == null) {

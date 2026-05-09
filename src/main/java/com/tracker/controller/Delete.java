@@ -5,7 +5,6 @@ import com.tracker.entity.User;
 import com.tracker.persistence.JobDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -20,7 +19,7 @@ import java.io.IOException;
  * @author EmileM
  */
 @WebServlet(urlPatterns = "/delete")
-public class Delete extends HttpServlet {
+public class Delete extends BaseServlet {
     private static final Logger log = LogManager.getLogger(Delete.class);
     private JobDao jobDao;
 
@@ -33,11 +32,8 @@ public class Delete extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
-            resp.sendRedirect(req.getContextPath() + "/index.jsp");
-            return;
-        }
+        HttpSession session = requireAuth(req, resp);
+        if (session == null) return;
 
         String idParam = req.getParameter("id");
         if (idParam == null || idParam.isBlank()) {
