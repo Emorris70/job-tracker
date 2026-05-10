@@ -20,8 +20,8 @@ import java.util.*;
  * <p>Beyond loading the user's job list, this servlet computes two sets of
  * derived data before forwarding:
  * <ul>
- *   <li><b>Stats</b> — total applications, active count, interview rate, offer rate.</li>
- *   <li><b>Timeline</b> — per-week application counts for the last 12 weeks,
+ *   <li><b>Stats</b> - total applications, active count, interview rate, offer rate.</li>
+ *   <li><b>Timeline</b> - per-week application counts for the last 12 weeks,
  *       pre-scaled for a CSS bar chart.</li>
  * </ul>
  *
@@ -47,7 +47,7 @@ public class Home extends BaseServlet {
      * stats and timeline attributes set.
      *
      * <p>Performs an ownership double-check alongside {@code AuthFilter}.
-     * Flow: {@code AuthFilter} (general) → {@code Home} (specific) → {@code home.jsp}.
+     * Flow: AuthFilter (general) -&gt; Home (specific) -&gt; home.jsp.
      *
      * @param req the client request.
      * @param resp the server response.
@@ -63,7 +63,7 @@ public class Home extends BaseServlet {
 
         User dbUser = (User) session.getAttribute("dbUser");
         if (dbUser == null) {
-            log.warn("Session missing dbUser — invalidating and redirecting to login");
+            log.warn("Session missing dbUser - invalidating and redirecting to login");
             session.invalidate();
             resp.sendRedirect(req.getContextPath() + "/index.jsp");
             return;
@@ -85,8 +85,7 @@ public class Home extends BaseServlet {
      * {@code statInterviewRate}, {@code statOfferRate}).
      *
      * <p>Interview rate counts jobs currently at the Interview or Offer stage.
-     * Offer rate counts jobs currently at Offer. Both return {@code "—"} when
-     * the total is zero.
+     * Offer rate counts jobs currently at Offer. Both return "0%" when total is zero.
      *
      * @param req the request to set attributes on.
      * @param jobs the user's full job list.
@@ -105,9 +104,9 @@ public class Home extends BaseServlet {
         req.setAttribute("statTotal", total);
         req.setAttribute("statActive", active);
         req.setAttribute("statInterviewRate",
-                total > 0 ? Math.round(atInterview * 100.0 / total) + "%" : "—");
+                total > 0 ? Math.round(atInterview * 100.0 / total) + "%" : "0%");
         req.setAttribute("statOfferRate",
-                total > 0 ? Math.round(atOffer * 100.0 / total) + "%" : "—");
+                total > 0 ? Math.round(atOffer * 100.0 / total) + "%" : "0%");
     }
 
 }

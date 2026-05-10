@@ -11,14 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9573e47b-8e41-4860-b0ac-c41935902eaa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/AccountSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/AccountSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Add.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Delete.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Delete.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/EditJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/EditJob.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/UpdateStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/UpdateStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tracker/controller/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tracker/controller/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/includes/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/includes/header.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/home.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -386,7 +381,7 @@
       <workItem from="1777832033873" duration="2174000" />
       <workItem from="1777904848484" duration="10835000" />
       <workItem from="1777992931860" duration="591000" />
-      <workItem from="1778256290307" duration="5553000" />
+      <workItem from="1778256290307" duration="9890000" />
     </task>
     <servers />
   </component>

@@ -3,9 +3,7 @@
 <div class="sidebar" id="sidebar" aria-hidden="true">
     <div class="sidebar-top">
         <div class="sidebar-brand">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="sidebar-brand-icon">
-                <path d="M160-120q-33 0-56.5-23.5T80-200v-560q0-33 23.5-56.5T160-840h640q33 0 56.5 23.5T880-760v560q0 33-23.5 56.5T800-120H160Zm0-80h640v-480H160v480Zm160-80v-80h320v80H320Zm0-160v-80h320v80H320Z"/>
-            </svg>
+            <img src="${pageContext.request.contextPath}/images/h-j-icon.png" alt="Job Tracker icon" class="sidebar-brand-icon">
             <span>Job Tracker</span>
         </div>
         <button class="sidebar-close" id="sidebarClose" aria-label="Close menu">
@@ -50,7 +48,10 @@
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <header>
-    <h1 class="main-header">Job Tracker</h1>
+    <h1 class="main-header">
+        <img src="${pageContext.request.contextPath}/images/h-j-icon.png" alt="Job Tracker icon" class="header-brand-icon">
+        Job Tracker
+    </h1>
     <div class="user-content">
         <div class="user-info">
             <img src="${pageContext.request.contextPath}/images/home-user.png" alt="user icon" class="img-d">
